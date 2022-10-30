@@ -1,0 +1,40 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>RecoDrone</title>
+        {% endif %}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href={{ url_for( "static" , filename="css/style.css") }} />
+        
+    </head>
+    <body>
+        <nav>
+            <div class="container">
+                <div class="company">
+                    <img class="logo" src="static/img/logo.svg" alt="logo" />
+                    <h1>RecoDrone</h1>    
+                </div>
+                
+                <div class="menu">
+                    <a href="" class="is-active">HOME</a>
+                    <a href="">ABOUT</a>
+                    <a href="">LOGIN</a>
+                </div>
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+        {% block content %} {% endblock %}
+        <script type="text/javascript" src="static/js/main.js"></script>
+    </body>
+</html>
