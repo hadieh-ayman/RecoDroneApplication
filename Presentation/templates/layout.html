@@ -8,32 +8,32 @@
         {% else %}
         <title>RecoDrone</title>
         {% endif %}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href={{ url_for( "static" , filename="css/style.css") }} />
-        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href={{ url_for( "static" ,
+        filename="css/style.css") }} />
     </head>
     <body>
-        <nav>
-            <div class="container">
-                <div class="company">
-                    <img class="logo" src="static/img/logo.svg" alt="logo" />
-                    <h1>RecoDrone</h1>    
-                </div>
-                
-                <div class="menu">
-                    <a href="" class="is-active">HOME</a>
-                    <a href="">ABOUT</a>
-                    <a href="">LOGIN</a>
-                </div>
-                <button class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+        <header class="header">
+            <div class="header-container">
+                <a href="/" class="logo">
+                    <img class="logo-image" src="static/img/logo-vertical.svg" alt="logo"></img>
+                </a>
+                <nav class="menu-wrap">
+                    <ul class="menu">
+                        <ls class="menu-item active"><a href="/home" class="menu-item-link">HOME</a></ls>
+                        <ls class="menu-item"><a href="/aboutus" class="menu-item-link">ABOUT US</a></ls>
+                        <ls class="menu-item"><a href="/contact" class="menu-item-link">CONTACT</a></ls>
+                    </ul>
+                </nav>
+                <a href="/login" class="login-btn">
+                    <span class="login-btn-txt">LOG IN</span>
+                </a>
             </div>
-        </nav>
+            
+            
+        </header>
         {% block content %} {% endblock %}
         <script type="text/javascript" src="static/js/main.js"></script>
     </body>
