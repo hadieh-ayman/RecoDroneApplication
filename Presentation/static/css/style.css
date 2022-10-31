@@ -9,9 +9,9 @@
 
     --gradient: linear-gradient(to left, rgba(0, 0, 0, 0) 1%, #f3b3a0 50%, rgba(0, 0, 0, 0) 100%);
 
-    --main-font: "Ubuntu Mono",sans-serif;
-    --sub-font: "monument-regular",sans-serif;
-    --label-font: "marvinvisions-bold",sans-serif;
+    --main-font: "Ubuntu Mono", sans-serif;
+    --sub-font: "monument-regular", sans-serif;
+    --label-font: "marvinvisions-bold", sans-serif;
 }
 
 * {
@@ -24,8 +24,8 @@ body {
     width: 100%;
     /* overflow-x: hidden */
     display: flex;
-	flex-direction: column;
-	font-family: var(--main-font);
+    flex-direction: column;
+    font-family: var(--main-font);
     line-height: 1;
     background-color: var(--russian-violet)
 }
@@ -75,7 +75,7 @@ body {
     margin-left: 0.45rem;
 }
 
-.menu{
+.menu {
     display: flex;
     width: 20rem;
     flex-direction: row;
@@ -84,7 +84,7 @@ body {
     list-style: none;
 }
 
-.menu-item{
+.menu-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,7 +93,7 @@ body {
     cursor: pointer !important;
 }
 
-.menu-item-link{
+.menu-item-link {
     position: relative;
     text-decoration: none;
     outline: none;
@@ -102,15 +102,16 @@ body {
     letter-spacing: 0.2rem;
     line-height: 0.5;
 }
+
 .menu-item:hover .menu-item-link:after,
-.menu-item.active .menu-item-link:after{
-	opacity: 1;
+.menu-item.active .menu-item-link:after {
+    opacity: 1;
     background: var(--gradient);
     text-shadow: 0px 0px 1px var(--melon);
 }
 
 .menu-item:hover .menu-item-link,
-.menu-item.active .menu-item-link{
+.menu-item.active .menu-item-link {
     color: var(--melon);
     text-shadow: 0px 0px 2px var(--melon);
 }
@@ -147,7 +148,7 @@ body {
 .login-btn:before {
     margin: -1px;
     z-index: -1;
-    background: linear-gradient(180deg,#a783fc,#f7ecff 36.46%,rgba(227,195,255,0) 97.92%,rgba(202,142,254,0));
+    background: linear-gradient(180deg, #a783fc, #f7ecff 36.46%, rgba(227, 195, 255, 0) 97.92%, rgba(202, 142, 254, 0));
 }
 
 .login-btn:after, .login-btn:before {
@@ -162,7 +163,7 @@ body {
 }
 
 .login-btn:after {
-    background: linear-gradient(180deg,rgba(247,236,255,.02),rgba(247,236,255,.1));
+    background: linear-gradient(180deg, rgba(247, 236, 255, .02), rgba(247, 236, 255, .1));
 }
 
 .login-btn:hover {
@@ -192,8 +193,12 @@ body {
 /* ----------------------------------------------- HAMBURGER CSS ---------------------------------------------- */
 
 .hamburger {
-    display: block;
     position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     z-index: 1;
     user-select: none;
     appearance: none;
@@ -203,41 +208,37 @@ body {
     cursor: pointer;
 }
 
-.hamburger span {
+.ham-stick {
     display: block;
     width: 32px;
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-
-    background-color: var(--light);
+    background: var(--lavender-blue);
     border-radius: 6px;
     z-index: 1;
-
     transform-origin: 0 0;
     transition: 0.4s;
 }
 
-.hamburger:hover span:nth-child(2) {
+.hamburger:hover .ham-stick.mid {
     transform: translateX(10px);
-    background-color: var(--primary)
+    background-color: var(--pearly-purple);
 }
 
-.hamburger.is-active span:nth-child(1) {
+.hamburger.active .ham-stick.top {
+    background-color: var(--pearly-purple);
     transform: translate(0px, -2px) rotate(45deg);
 }
 
-.hamburger.is-active span:nth-child(2) {
+.hamburger.active .ham-stick.mid {
     opacity: 0;
     transform: translateX(15px);
 }
 
-.hamburger.is-active span:nth-child(3) {
+.hamburger.active .ham-stick.bot {
+    background-color: var(--pearly-purple);
     transform: translate(-3px, 3px) rotate(-45deg);
-}
-
-.hamburger.is-active span {
-    background-color: var(--primary);
 }
 
 .center {
@@ -356,8 +357,20 @@ input[type="submit"]:hover {
 }
 
 
-@media (min-width: 768px) {
-    .hamburger {
+@media only screen and (max-width: 768px) {
+    .header-container {
+        position: relative;
+        margin: 0 2rem;
+    }
+
+    .login-btn {
         display: none;
+    }
+    .menu-wrap {
+        display: none;
+    }
+
+    .hamburger{
+        display: block;
     }
 }

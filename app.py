@@ -8,7 +8,7 @@ app = Flask(__name__,template_folder='Presentation/templates', static_folder='Pr
 @app.route('/')
 @app.route('/login')
 def login():
-    return render_template('login.html', title='Login')
+    return render_template('login.html')
 
 @app.route('/home')
 def home():
