@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -18,11 +19,16 @@
         <header class="header">
             <div class="header-container">
                 <a href="/" class="logo">
-                    <img class="logo-image" src="static/img/logo-vertical.svg" alt="logo"></img>
+                    <!-- <img class="logo-image" src="static/img/logo-animated.svg" alt="logo"></img> -->
+                    <span class="object-span">
+                        <object class="logo-image" type="image/svg+xml" data="static/img/logo-vertical.svg" >
+                            <img class="logo-image-bk" src="static/img/logo-vertical.svg" alt="logo"></img>
+                        </object>
+                    </span>
                 </a>
                 <nav class="menu-wrap">
                     <ul class="menu">
-                        <ls class="menu-item active"><a href="/home" class="menu-item-link">HOME</a></ls>
+                        <ls class="menu-item active"><a href="/home" class="menu-item-link">HOMEPAGE</a></ls>
                         <ls class="menu-item"><a href="/aboutus" class="menu-item-link">ABOUT US</a></ls>
                         <ls class="menu-item"><a href="/contact" class="menu-item-link">CONTACT</a></ls>
                     </ul>
@@ -36,10 +42,10 @@
                     <span class="ham-stick bot"></span>
                 </div>
             </div>
-            
-            
         </header>
+        <main>
         {% block content %} {% endblock %}
+        </main>
         <script type="text/javascript" src="static/js/main.js"></script>
     </body>
 </html>

@@ -42,6 +42,7 @@ body {
 .header-container {
     position: relative;
     margin: 0 3rem;
+    margin-top: 1rem;
     /* height: 0.89rem; */
     display: flex;
     flex-direction: row;
@@ -53,7 +54,9 @@ body {
 
 .logo {
     width: 10rem;
-    display: flex;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
     align-items: center;
     outline: none;
     border: none;
@@ -61,10 +64,16 @@ body {
     cursor: pointer !important;
 }
 
-.logo-image {
+.object-span {
+    display: inline-block;
+}
+
+.logo-image, .logo-image-bk {
+    position: relative;
+    z-index: -1;
     width: 100%;
     opacity: 1;
-    filter: invert(73%) sepia(20%) saturate(791%) hue-rotate(198deg) brightness(110%) contrast(98%);
+    filter: invert(73%) sepia(20%) saturate(791%) hue-rotate(198deg) brightness(110%) contrast(98%) drop-shadow(0 0 0.5px var(--lavender-blue));
 }
 
 /* --------------------------------------------------- MENU CSS ---------------------------------------------- */
@@ -366,11 +375,12 @@ input[type="submit"]:hover {
     .login-btn {
         display: none;
     }
+
     .menu-wrap {
         display: none;
     }
 
-    .hamburger{
+    .hamburger {
         display: block;
     }
 }
