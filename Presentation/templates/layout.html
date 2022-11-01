@@ -12,6 +12,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href={{ url_for( "static" ,
         filename="css/style.css") }} />
     </head>
@@ -28,7 +29,7 @@
                 </a>
                 <nav class="menu-wrap">
                     <ul class="menu">
-                        <ls class="menu-item active"><a href="/home" class="menu-item-link">HOMEPAGE</a></ls>
+                        <ls class="menu-item"><a href="/home" class="menu-item-link">HOMEPAGE</a></ls>
                         <ls class="menu-item"><a href="/aboutus" class="menu-item-link">ABOUT US</a></ls>
                         <ls class="menu-item"><a href="/contact" class="menu-item-link">CONTACT</a></ls>
                     </ul>
@@ -44,7 +45,7 @@
             </div>
         </header>
         <main>
-        {% block content %} {% endblock %}
+            {% block content %} {% endblock %}
         </main>
         <script type="text/javascript" src="static/js/main.js"></script>
     </body>
