@@ -11,7 +11,7 @@
 
     --main-font: "Ubuntu Mono", sans-serif;
     --bold-font: 'Kanit', sans-serif;
-    --sub-font: "spacemono-regular", sans-serif;
+    --sub-font: "Space Mono", monospace;
 }
 
 * {
@@ -22,13 +22,22 @@
 
 body {
     width: 100%;
-    /* overflow-x: hidden */
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     font-family: var(--main-font);
     line-height: 1;
-    background-color: var(--russian-violet)
+    background-color: var(--russian-violet);
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 
 /* =================================================== BUBBLES BACKGROUND CSS ============================================= */
 
@@ -61,7 +70,7 @@ body {
 
 @keyframes animate {
     0% {
-        transform: translateY(90vh) scale(0);
+        transform: translateY(100vh) scale(0);
     }
 
     100% {
@@ -76,6 +85,11 @@ body {
     display: block;
     width: 100%;
     z-index: 100;
+    transition: 0.3s ease-in-out;
+}
+
+.header.show-bg {
+    background: #140d41ea;
 }
 
 .header-container {
@@ -179,12 +193,13 @@ body {
 /* ---------------------------------------------- LOGIN BUTTON CSS -------------------------------------------- */
 
 .login-btn {
-    height: 2.2rem;
+    height: 2.5rem;
+    margin: 0 2rem;
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     background: var(--persian-indigo);
     outline: none;
     box-sizing: border-box;
@@ -316,7 +331,7 @@ body {
 .inner-form-block {
     position: relative;
     display: flex;
-    min-height: 90vh;
+    min-height: 100vh;
     flex-direction: column;
     align-items: center;
     padding: 0 1.2rem;
@@ -410,6 +425,10 @@ body {
     transition: all .375s ease;
 }
 
+.error-span.show {
+    opacity: 1;
+}
+
 .input-border {
     background: linear-gradient(180deg, #804ef6, #c88dfd 50%, #573d9d);
     width: 25.2rem;
@@ -480,13 +499,94 @@ body {
     background: #804ef6;
 }
 
+/* ----------------------------------------------- FOOTER CSS ---------------------------------------------- */
+
+.footer{
+    /* margin: 0 2rem; */
+    width: 100%;
+    display: block;
+    flex: 0 0 auto;
+    position: relative;
+    background: var(--russian-violet);
+}
+
+.footer-container{
+    margin: 2rem 5rem;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 16rem;
+    margin-right: 10rem;
+    display: flex;
+    align-items: center;
+    outline: none;
+    user-select: none;
+    border: none;
+    text-decoration: none;
+}
+
+footer .logo-image{
+    z-index: 1;
+    filter: invert(99%) sepia(0%) saturate(4450%) hue-rotate(112deg) brightness(111%) contrast(100%);
+}
+
+.footer-menu-wrap {
+    display: block;
+}
+
+.footer-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 40rem;
+    list-style: none;
+}
+
+.footer-menu-item {
+    display: flex;
+    cursor: pointer !important;
+}
+
+.footer-menu-link {
+    font-family: var(--sub-font);
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: white;
+    transition: color 375ms ease;
+    text-decoration: none;
+    outline: none;
+}
+
+.footer-menu-item:hover .footer-menu-link {
+    color: var(--lavender-blue) !important;
+}
+
+.footer-bottom-line {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright {
+    padding: 0.5rem;
+    color: var(--lavender-blue);
+    font-family: var(--main-font);
+    font-size: 1rem;
+}
 
 @media only screen and (max-width: 768px) {
     .bubbles span {
         height: 5px;
         box-shadow: 0 0 0 2px #b86ba044,
-            0 0 10px #b86ba0,
-            0 0 20px #b86ba0;
+        0 0 10px #b86ba0,
+        0 0 20px #b86ba0;
     }
 
     .bubbles span:nth-child(even) {
