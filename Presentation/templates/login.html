@@ -16,7 +16,7 @@
     <!-- <span class="error-block"></span> -->
     <div class="inner-form-block">
         <h2 class="form-title">Welcome back! Nice to see you again.</h2>
-        <form action="#" method="GET" class="login-form">
+        <form action="dashboard" method="GET" class="login-form">
             <label for>
                 <span>Username</span>
                 <div class="input-wrap">
@@ -26,6 +26,7 @@
                         class="required input"
                         id = "username"
                         placeholder="Please enter your username."
+                        autocomplete = "off"
                     />
                     <span class="error-span">Please enter a valid username</span>
                     <div class="input-border"></div>
@@ -40,8 +41,9 @@
                         class="required input"
                         id="password"
                         placeholder="Please enter your password."
+                        autocomplete="off"
                     />
-                    <span class="error-span">Please enter a valid username</span>
+                    <span class="error-span">Please enter a valid password</span>
                     <div class="input-border"></div>
                 </div>
             </label>

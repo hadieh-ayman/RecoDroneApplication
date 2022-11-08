@@ -12,8 +12,11 @@ def home():
 
 @app.route('/login')
 def login():
-    return render_template('login.html', title='Login')
+    return render_template('login.html', title='RecoDrone-Login')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html', title='RecoDrone-Dashboard')
 
 
 if __name__ == "__main__":
