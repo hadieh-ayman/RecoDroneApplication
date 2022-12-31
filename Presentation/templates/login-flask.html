@@ -1,0 +1,90 @@
+{% extends "layout.html" %} {% block content %}
+<div class="bubbles">
+    <span style="--i: 2"></span><span style="--i: 15"></span
+    ><span style="--i: 9"></span> <span style="--i: 1"></span
+    ><span style="--i: 7"></span><span style="--i: 9"></span>
+    <span style="--i: 4"></span><span style="--i: 7"></span
+    ><span style="--i: 11"></span> <span style="--i: 5"></span
+    ><span style="--i: 7"></span><span style="--i: 14"></span>
+    <span style="--i: 12"></span><span style="--i: 3"></span
+    ><span style="--i: 1"></span> <span style="--i: 8"></span
+    ><span style="--i: 3"></span><span style="--i: 8"></span>
+    <span style="--i: 4"></span><span style="--i: 13"></span
+    ><span style="--i: 5"></span> <span style="--i: 15"></span
+    ><span style="--i: 12"></span><span style="--i: 9"></span>
+    <span style="--i: 6"></span><span style="--i: 1"></span
+    ><span style="--i: 2"></span> <span style="--i: 2"></span
+    ><span style="--i: 14"></span><span style="--i: 15"></span>
+    <span style="--i: 11"></span><span style="--i: 4"></span
+    ><span style="--i: 9"></span>
+</div>
+<section class="form-block">
+    <!-- <span class="error-block"></span> -->
+    <div class="inner-form-block">
+        <h2 class="form-title">Welcome back! Nice to see you again.</h2>
+        <form action="dashboard" method="POST" class="login-form">
+            {{ form.hidden_tag() }}
+            <fieldset style="border: none;">
+                <legend></legend>
+                <label for>
+                    <span>Username</span>
+                    <div class="input-wrap">
+                        {{ form.username(class="input") }}
+                        <span class="error-span">Please enter a valid username</span>
+                        <div class="input-border"></div>
+                    </div>
+                </label>
+                <label for>
+                    <span>Passwords</span>  
+                    <div class="input-wrap">
+                        {{ form.password(class="input") }}
+                        <span class="error-span">Please enter a valid password</span>
+                        <div class="input-border"></div>
+                    </div>
+                </label>
+            </fieldset>
+            <label for class="submit-label">
+                <div class="submit-btn">
+                    {{ form.submit(class="submit-input") }}
+                </div>
+            </label>
+
+            <!-- <label for>
+                <span>Username</span>
+                <div class="input-wrap">
+                    <input
+                        type="text"
+                        name="username"
+                        class="required input"
+                        id = "username"
+                        placeholder="Please enter your username."
+                        autocomplete = "off"
+                    />
+                    <span class="error-span">Please enter a valid username</span>
+                    <div class="input-border"></div>
+                </div>
+            </label>
+            <label for>
+                <span>Password</span>
+                <div class="input-wrap">
+                    <input
+                        type="password"
+                        name="password"
+                        class="required input"
+                        id="password"
+                        placeholder="Please enter your password."
+                        autocomplete="off"
+                    />
+                    <span class="error-span">Please enter a valid password</span>
+                    <div class="input-border"></div>
+                </div>
+            </label>
+            <label for class="submit-label">
+              <div class="submit-btn">
+                <input class="submit-input" type="submit" value="login" >
+              </div>
+            </label> -->
+        </form>
+    </div>
+</section>
+{% endblock content %}
