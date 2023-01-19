@@ -1,0 +1,140 @@
+:root {
+    --russian-violet: #140d41;
+    --persian-indigo: #361e7c;
+    --majorelle-blue: #804ef6;
+    --lavender-blue: #c9d0fd;
+    --melon: #f3b3a0;
+    --puce: #d68fa0;
+    --pearly-purple: #b86ba0;
+
+    --gradient: linear-gradient(to left, rgba(0, 0, 0, 0) 1%, #f3b3a0 50%, rgba(0, 0, 0, 0) 100%);
+
+    --main-font: "Ubuntu Mono", sans-serif;
+    --bold-font: 'Kanit', sans-serif;
+    --sub-font: "Space Mono", monospace;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--main-font);
+    line-height: 1;
+    background-color: var(--russian-violet);
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* =================================================== HEADER CSS ============================================= */
+
+.header {
+    /* position: fixed; */
+    display: block;
+    width: 100%;
+    z-index: 100;
+    transition: 0.3s ease-in-out;
+}
+
+.header.show-bg {
+    background: #140d41ea;
+}
+
+.header-container {
+    /* position: relative; */
+    margin: 0 2rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --------------------------------------------------- LOGO CSS ---------------------------------------------- */
+
+.logo {
+    width: 10rem;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer !important;
+}
+
+.logo-image {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    opacity: 1;
+    filter: invert(73%) sepia(20%) saturate(791%) hue-rotate(198deg) brightness(110%) contrast(98%) drop-shadow(0 0 0.5px var(--lavender-blue));
+}
+
+/* --------------------------------------------------- ACCOUNT CSS ---------------------------------------------- */
+
+.menu-wrap {
+    display: flex;
+    width: 13rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account {
+    display: flex;
+    width: 7rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account img {
+    width: 1.5rem;
+    border-radius: 1rem;
+}
+
+.account-name {
+    font-family: var(--bold-font);
+    color: white;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.account-logout {
+    text-decoration: none;
+    outline: none;
+    color: var(--lavender-blue);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.logout-link:hover .account-logout,
+.logout-link.active .account-logout {
+    color: var(--melon);
+    text-shadow: 0px 0px 2px var(--melon);
+}
+
+/* -------------------------------------------------- VIEWER CSS --------------------------------------------- */
+
+.container {
+    display: flex;
+}
+
+.view-img {
+    width: 40rem;
+}

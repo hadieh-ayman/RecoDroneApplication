@@ -19,10 +19,62 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href={{ url_for( "static" ,
-        filename="css/style.css") }} />
+        filename="css/dashboard.css") }} />
         <title>Dashboard</title>
     </head>
     <body>
-        
+        <header class="header">
+            <div class="header-container">
+                <a href="/" class="logo">
+                    <img
+                        class="logo-image"
+                        src="static/img/logo-horizontal.svg"
+                        alt="logo"
+                    />
+                </a>
+                <nav class="menu-wrap">
+                    <div class="account">
+                        <img src="static/img/profile.jpg" alt="" />
+                        <p class="account-name">Hadea0090</p>
+                    </div>
+                    <div class="logout-link">
+                        <a class="account-logout" href="login">Log Out</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <div class="viewer-controller-container">
+                    <div class="viewer-container">
+                        <img class="view-img" src="static/img/SLAM-map.png" alt="" />
+                        <div class="view-menu">
+                            <ls class="view-link">Camera</ls>
+                            <ls class="view-link">2D map</ls>
+                            <ls class="view-link">3D map</ls>
+                            <img src="static/img/arrow-up.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="controller-container">
+                        <div>left controller</div>
+                        <div>
+                            <div>speedometer</div>
+                            <div>manual vs offboard</div>
+                            <div>land kill loiter</div>
+                        </div>
+                        <div>right controller</div>
+                    </div>
+                </div>
+                <div>
+                    <div>COEX clover</div>
+                    <div>FCU</div>
+                    <div>Armed state</div>
+                    <div>Flying For</div>
+                    <div>Battery</div>
+                    <div>Local coordinates</div>
+                    <div>footer</div>
+                </div>
+            </div>
+        </main>
     </body>
 </html>

@@ -7,7 +7,6 @@ app = Flask(__name__,template_folder='Presentation/templates', static_folder='Pr
 
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-@app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html', title='RecoDrone')
@@ -17,6 +16,7 @@ def login():
     form = LoginForm()
     return render_template('login.html', title='RecoDrone-Login', form=form)
 
+@app.route('/')
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html', title='RecoDrone-Dashboard')
