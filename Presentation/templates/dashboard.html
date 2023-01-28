@@ -22,47 +22,83 @@
         filename="css/dashboard.css") }} />
         <title>Dashboard</title>
     </head>
-    <body>
-        <header class="header">
-            <div class="header-container">
-                <a href="/" class="logo">
-                    <img
-                        class="logo-image"
-                        src="static/img/logo-horizontal.svg"
-                        alt="logo"
-                    />
-                </a>
-                <nav class="menu-wrap">
-                    <div class="account">
-                        <img src="static/img/profile.jpg" alt="" />
-                        <p class="account-name">Hadea0090</p>
-                    </div>
-                    <div class="logout-link">
-                        <a class="account-logout" href="login">Log Out</a>
-                    </div>
-                </nav>
-            </div>
-        </header>
+    <body>  
         <main>
+            <div class="header">
+                <div class="header-container">
+                    <a href="/" class="logo">
+                        <img
+                            class="logo-image"
+                            src="static/img/logo.svg"
+                            alt="logo"
+                        />
+                    </a>
+                    <nav class="menu-wrap">
+                        <div class="account">
+                            <p class="account-name">Hadea0090</p>
+                            <img src="static/img/profile.jpg" alt="" />
+                        </div>
+                        <div class="logout-link">
+                            <a class="account-logout" href="login">Log Out</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
             <div class="container">
                 <div class="viewer-controller-container">
                     <div class="viewer-container">
-                        <img class="view-img" src="static/img/SLAM-map.png" alt="" />
-                        <div class="view-menu">
-                            <ls class="view-link">Camera</ls>
-                            <ls class="view-link">2D map</ls>
-                            <ls class="view-link">3D map</ls>
-                            <img src="static/img/arrow-up.svg" alt="">
+                        <div class="rviz-view"></div>
+                        <div class="dropdown-menu">
+                            <div class="menu-select">
+                                <span class="selected">Camera</span>
+                                <img
+                                    src="static/img/arrow-up.svg"
+                                    alt=""
+                                    class="menu-arrow"
+                                />
+                            </div>
+                            <ul class="view-menu">
+                                <li class="view-link">2D map</li>
+                                <li class="view-link">3D map</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="controller-container">
-                        <div>left controller</div>
+                        <div class="left-controller">
+                            <div class="outer-circle">
+                                <div class="middle-circle">
+                                    <div class="inner-circle">
+                                        <div class="main-circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div>
-                            <div>speedometer</div>
+                            <div class="speedometer">
+                                <div class="gauge">
+                                    <div class="slice-colors">
+                                        <div class="st slice-item"></div>
+                                        <div class="st slice-item"></div>
+                                        <div class="st slice-item"></div>
+                                        <div class="st slice-item"></div>
+                                        <div class="st slice-item"></div>
+                                    </div>
+                                    <div class="needle"></div>
+                                    <div class="gauge-center"></div>
+                                </div>
+                            </div>
                             <div>manual vs offboard</div>
                             <div>land kill loiter</div>
                         </div>
-                        <div>right controller</div>
+                        <div class="right controller">
+                            <div class="outer-circle">
+                                <div class="middle-circle">
+                                    <div class="inner-circle">
+                                        <div class="main-circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -76,5 +112,6 @@
                 </div>
             </div>
         </main>
+        <script type="text/javascript" src="static/js/main.js"></script>
     </body>
 </html>

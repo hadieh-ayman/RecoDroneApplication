@@ -6,6 +6,12 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 const error_message = document.querySelectorAll(".error-span");
 const error_border = document.querySelectorAll(".input-border");
+//dropdown menu
+const dropdown = document.querySelector(".dropdown-menu");
+const select = dropdown.querySelector(".menu-select");
+const arrow = dropdown.querySelector(".menu-arrow");
+const menu = dropdown.querySelector(".view-menu");
+const options = dropdown.querySelectorAll(".view-link")
 
 window.onscroll = () => {
     if (window.scrollY > 50) {
@@ -14,6 +20,8 @@ window.onscroll = () => {
         navbar.classList.remove("show-bg");
     }
 };
+
+//home / login
 
 hamburger.addEventListener("click", function () {
     this.classList.toggle("active");
@@ -35,3 +43,10 @@ login_form.addEventListener("submit", (e) => {
         error_border.forEach((error) => {error.classList.add('error')})
     }
 });
+
+//dashboard
+
+select.addEventListener("click", () => {
+    arrow.classList.toggle("rotate");
+    menu.classList.toggle("active")
+})
