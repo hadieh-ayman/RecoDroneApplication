@@ -306,13 +306,13 @@ body::-webkit-scrollbar {
 
 /* ----------------------------------------------- LOGIN FORM CSS ---------------------------------------------- */
 
-.form-block {
-    /* width: 100%;
+/* .form-block {
+    width: 100%;
     background-color: var(--pearly-purple);
     display: flex;
     position: unset;
-    z-index: 99; */
-}
+    z-index: 99;
+} */
 
 .error-block {
     width: 100%;

@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="speed-container">
                             <div class="speedometer">
                                 <div class="gauge">
                                     <div class="slice-colors">
@@ -87,8 +87,21 @@
                                     <div class="gauge-center"></div>
                                 </div>
                             </div>
-                            <div>manual vs offboard</div>
-                            <div>land kill loiter</div>
+                            <div class="switch">
+                                <div class="switch-box"></div>
+                                <button class="switch-button" onclick="leftClick()">Manual</button>
+                                <button class="switch-button" onclick="rightClick()">Offboard</button>
+                            </div>
+                            <div class="stop-command">
+                                <div class="loiter">
+                                    <img src="static/img/drone-loiter.svg" alt="" class="loiter-img">
+                                    <p class="loiter-text">LOITER</p>
+                                </div>
+                                <div class="land">
+                                    <img src="static/img/plane-land.svg" alt="" class="land-img">
+                                    <p class="land-text">LAND</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="right controller">
                             <div class="outer-circle">
@@ -101,17 +114,91 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>COEX clover</div>
-                    <div>FCU</div>
-                    <div>Armed state</div>
-                    <div>Flying For</div>
-                    <div>Battery</div>
-                    <div>Local coordinates</div>
-                    <div>footer</div>
+                <div class="information-container">
+                    <div class="title-container">
+                        <p class="clover-serial">C/H15-110RU</p>
+                        <p class="clover-ver">COEX CLOVER 4</p>
+                    </div>
+                    <div class="info-border">
+                        <div class="title-box">
+                            <p class="title-text">COEX FCU PIX</p>
+                        </div>
+                        <div class="content-box">
+                            <img src="static/img/device-ram.svg" alt="" class="fcu-img">
+                            <p class="fcu-status">CONNECTED</p>
+                        </div>
+                    </div>
+                    <div class="info-break"></div>
+                    <div class="info-border">
+                        <div class="title-box">
+                            <p class="title-text">DRONE STATE</p>
+                        </div>
+                        <div class="content-box">
+                            <img src="static/img/armed.svg" alt="" class="arm-img">
+                            <p class="arm-status">UNARMED</p>
+                        </div>
+                    </div>
+                    <div class="info-break"></div>
+                    <div class="info-border">
+                        <div class="title-box">
+                            <p class="title-text">FLYING FOR</p>
+                        </div>
+                        <div class="content-box">
+                            <img src="static/img/timer.svg" alt="" class="time-img">
+                            <p class="time-status">00:02:43</p>
+                        </div>
+                    </div>
+                    <div class="info-break"></div>
+                    <div class="info-border">
+                        <div class="title-box">
+                            <p class="title-text">BATTERY</p>
+                        </div>
+                        <div class="content-box column">
+                            <div class="battery-num">
+                                <img src="static/img/battery.svg" alt="" class="battery-img">
+                                <p class="battery-status">70%</p>
+                            </div>
+                            <div class="battery-perc">
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash"></div>
+                                <div class="battery-dash"></div>
+                                <div class="battery-dash"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-break"></div>
+                    <div class="info-border">
+                        <div class="title-box">
+                            <p class="title-text">Local Coordinates</p>
+                        </div>
+                        <div class="content-box column">
+                            <div class="coordinate-box">
+                                <img src="" alt="" class="letter"><img src="" alt="" class="graph">
+                                <p class="coord"></p>
+                            </div>
+                            <div class="coordinate-box">
+                                <img src="" alt="" class="letter"><img src="" alt="" class="graph">
+                                <p class="coord"></p>
+                            </div>
+                            <div class="coordinate-box">
+                                <img src="" alt="" class="letter"><img src="" alt="" class="graph">
+                                <p class="coord"></p>
+                            </div>
+                            <img src="static/img/device-ram.svg" alt="" class="coord-img">
+                            <div class="coord-status"></div>
+                        </div>
+                    </div>
+                    <div class="info-break"></div>
+                    <div>RecoDrone©. All Rights Reserved.</div>
                 </div>
             </div>
         </main>
-        <script type="text/javascript" src="static/js/main.js"></script>
+        <script type="text/javascript" src="static/js/dashboard.js"></script>
     </body>
 </html>
