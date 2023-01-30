@@ -64,7 +64,7 @@ main {
 }
 
 .header-container {
-    height: 95vh;
+    height: 94.2vh;
     margin: 1rem 0;
     display: flex;
     flex-direction: column;
@@ -152,20 +152,20 @@ main {
 
 .viewer-container {
     position: relative;
-    width: 40rem;
+    width: 55rem;
     height: 20rem;
 }
 
 .rviz-view {
     position: absolute;
-    width: 40rem;
+    width: 55rem;
     height: 20rem;
-    background-color: var(--lavender-blue);
+    background-color: black;
 }
 
 .dropdown-menu {
     position: absolute;
-    left: 85%;
+    left: 87%;
     top: 0.5rem;
 }
 
@@ -238,22 +238,48 @@ main {
 
 .outer-circle {
     position: relative;
-    width: 9rem;
-    height: 9rem;
+    width:11rem;
+    height: 11rem;
     background: linear-gradient(-30deg, rgba(54, 30, 124, 0) 0%, rgba(54, 30, 124, 1) 100%);
     border-radius: 50%;
     border-style: dashed;
     border-color: #804ef650;
 }
 
+.controller-arrow {
+    position: absolute;
+    width: 2rem;
+    filter: invert(80%) sepia(25%) saturate(544%) hue-rotate(198deg) brightness(96%) contrast(107%);
+}
+
+.controller-arrow.up {
+    top: 0;
+    left: 4.4rem;
+}
+
+.controller-arrow.right {
+    top: 4.4rem;
+    left: 9rem;
+}
+
+.controller-arrow.down {
+    top: 9rem;
+    left: 4.4rem;
+}
+
+.controller-arrow.left {
+    top: 4.4rem;
+    left: 0rem;
+}
+
 .middle-circle {
     z-index: 1;
     position: absolute;
-    width: 6rem;
-    height: 6rem;
+    width: 7rem;
+    height: 7rem;
     top: 50%;
     left: 50%;
-    margin: -3rem 0 0 -3rem;
+    margin: -3.5rem 0 0 -3.5rem;
     background: linear-gradient(150deg, rgba(54, 30, 124, 0) 0%, rgba(54, 30, 124, 1) 100%);
     border-radius: 50%;
     border-style: dashed;
@@ -263,11 +289,11 @@ main {
 .inner-circle {
     z-index: 2;
     position: absolute;
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     top: 50%;
     left: 50%;
-    margin: -2rem 0 0 -2rem;
+    margin: -2.5rem 0 0 -2.5rem;
     background: #804ef680;
     border-radius: 50%;
 }
@@ -507,6 +533,7 @@ main {
     color: #804ef680;
     font-weight: bold;
     text-transform: uppercase;
+    border-left: 1px solid var(--persian-indigo);
 }
 
 .clover-serial {
@@ -532,9 +559,10 @@ main {
 
 .title-box {
     position: absolute;
-    top: -0.5rem;
-    left: 1rem;
-    padding: 0 0.25rem;
+    top: -0.3rem;
+    left: 1.2rem;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
     background: var(--russian-violet);
 }
 
@@ -544,17 +572,34 @@ main {
     justify-content: space-evenly;
     align-items: center;
     padding: 0.5rem;
-    border: 2px solid #804ef680;
-    border-radius: 1.5rem/1rem;
+    border: 1.5px solid #804ef680;
+    border-radius: 1.3rem/2rem;
 }
 
 .content-box img {
-    width: 3rem;
+    width: 2rem;
 }
 
 .content-box p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--sky-cyan)
+}
+
+.fcu-img {
+    filter: invert(84%) sepia(37%) saturate(398%) hue-rotate(131deg) brightness(86%) contrast(89%);
+}
+
+.arm-img {
+    filter: invert(51%) sepia(97%) saturate(321%) hue-rotate(298deg) brightness(89%) contrast(93%);
+}
+
+.arm-status {
+    color: #DB6D87 !important;
+}
+
+.time-img, .battery-img {
+    width: 1.5rem !important; 
+    filter: invert(84%) sepia(37%) saturate(398%) hue-rotate(131deg) brightness(86%) contrast(89%);
 }
 
 .content-box.column {
@@ -566,18 +611,21 @@ main {
     justify-content: space-evenly;
     align-items: center;
     width: 30%;
+    padding-bottom: 0.5rem;
 }
+
 
 .battery-perc {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 75%;
+    padding-bottom: 0.5rem;
 }
 
 .battery-dash {
     height: 0.5rem;
-    width: 1.5rem;
+    width: 1rem;
     background: #7ECBD080;
 }
 
@@ -585,3 +633,25 @@ main {
     background: var(--sky-cyan)
 }
 
+.coordinate-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.coordinate-box img {
+    filter: invert(72%) sepia(29%) saturate(718%) hue-rotate(301deg) brightness(91%) contrast(82%);
+}
+
+.coord {
+    color: var(--puce) !important;
+    font-size: 1.3rem !important;
+    padding-left: 0.5rem;
+}
+
+.footer {
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
+    color: var(--majorelle-blue);
+    align-self: center;
+}
