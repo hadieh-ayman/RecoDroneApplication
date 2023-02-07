@@ -165,8 +165,14 @@ main {
 .rviz-view {
     /* position: absolute;
     width: 55rem; */
+    display: flex;
+    justify-content: center;
     height: 60vh;
     background-color: black;
+}
+
+.rviz-view img{
+    height: 60vh;
 }
 
 .dropdown-menu {
