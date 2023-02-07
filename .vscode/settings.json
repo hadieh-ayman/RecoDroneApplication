@@ -1,3 +1,4 @@
 {
-    "python.defaultInterpreterPath": "C:\\Users\\hadea\\Desktop\\Code\\Environments\\drone_env\\Scripts"
+    "python.defaultInterpreterPath": "C:\\Users\\hadea\\Desktop\\Code\\Environments\\drone_env\\Scripts",
+    "javascript.validate.enable": false
 }

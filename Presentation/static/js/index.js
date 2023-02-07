@@ -9,6 +9,7 @@ var ros = new ROSLIB.Ros({
 
 ros.on("connection", function () {
     console.log("Connected to websocket server.");
+    stream_start();
 });
 
 ros.on("error", function (error) {
@@ -21,7 +22,9 @@ ros.on("close", function () {
 
 // Handle ROS connection
 window.setInterval(function () {
-    if (ros.isConnected) return;
+    if (ros.isConnected)
+        console.log(ros.isConnected);
+        return;
     console.log(ros.isConnected);
     ros.connect(rosbridge_url);
 }, 1000);
@@ -30,8 +33,8 @@ window.setInterval(function () {
 
 var rviz_stream = new ROSLIB.Topic({
     ros: ros,
-    name: "/rviz1/camera1/image_compressed/compressed",
-    messageType: "sensor_msgs/CompressedImage",
+    name: "/rviz1/camera1/Image",
+    messageType: "sensor_msgs/Image",
 });
 
 // ################### Subscribe to image topics ###################
