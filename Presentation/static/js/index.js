@@ -32,19 +32,21 @@ window.setInterval(function () {
 // ################### Define image topics ###################
 
 var rviz_stream = new ROSLIB.Topic({
-    ros: ros,
-    name: "/rviz1/camera1/Image",
-    messageType: "sensor_msgs/Image",
-});
+    ros: ros, name: '/rviz1/camera1/image_compressed/compressed',
+    messageType: 'sensor_msgs/CompressedImage'
+  });
 
 // ################### Subscribe to image topics ###################
 
+var stream = undefined;
+
 function stream_start() {
-    console.log("stream is starting");
-    rviz_stream.subscribe(function (message) {
-        console.log("stream is started successfully");
-        document.getElementById("rviz-screen").src =
-            "data:image/jpg;base64," + message.data;
-        rviz_stream.unsubscribe();
+    console.log('stream is starting');
+    if (stream != undefined) {stream.unsubscribe();}
+    stream = rviz_stream;
+    console.log("about to subscribe")
+    rviz_stream.subscribe(function(message) {
+      console.log("subscribed")
+      document.getElementById('rviz-screen').src = "data:image/jpg;base64," + message.data;
     });
-}
+  }
