@@ -26,7 +26,7 @@
     <body>
         <header class="header">
             <div class="header-container">
-                <a href="/" class="logo">
+                <a href="{{ url_for('home') }}" class="logo">
                     <!-- <img class="logo-image" src="static/img/logo-animated.svg" alt="logo"></img> -->
                     <span class="object-span">
                         <object
@@ -42,26 +42,26 @@
                         </object>
                     </span>
                 </a>
-                <nav class="menu-wrap">
+                <nav class="menu-wrap" aria-label="Navigation Bar">
                     <ul class="menu">
                         <ls class="menu-item"
-                            ><a href="/home" class="menu-item-link"
+                            ><a href="{{ url_for('home') }}" class="menu-item-link"
                                 >HOMEPAGE</a
                             ></ls
                         >
                         <ls class="menu-item"
-                            ><a href="/aboutus" class="menu-item-link"
+                            ><a href="" class="menu-item-link"
                                 >ABOUT US</a
                             ></ls
                         >
                         <ls class="menu-item"
-                            ><a href="/contact" class="menu-item-link"
+                            ><a href="" class="menu-item-link"
                                 >CONTACT</a
                             ></ls
                         >
                     </ul>
                 </nav>
-                <a href="/login" class="login-btn">
+                <a href="{{ url_for('login') }}" class="login-btn">
                     <span class="login-btn-txt">LOG IN</span>
                 </a>
                 <div class="hamburger">
@@ -71,20 +71,28 @@
                 </div>
             </div>
         </header>
-        <main>{% block content %} {% endblock %}</main>
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %} {% endblock %}
+        </main>
         <footer class="footer">
             <div class="footer-container">
-                <a href="/" class="footer-logo">
+                <a href="{{ url_for('home') }}" class="footer-logo">
                     <img
                         class="logo-image"
                         src="static/img/logo-horizontal.svg"
                         alt="logo"
                     />
                 </a>
-                <nav class="footer-menu-wrap">
+                <nav class="footer-menu-wrap" aria-label="Footer">
                     <ul class="footer-menu">
                         <li class="footer-menu-item">
-                            <a href="/home" class="footer-menu-link">Our Project</a>
+                            <a href="{{ url_for('home') }}" class="footer-menu-link">Our Project</a>
                         </li>
                         <li class="footer-menu-item">
                             <a href="" class="footer-menu-link">Github</a>

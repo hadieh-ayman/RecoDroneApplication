@@ -22,26 +22,44 @@
     <!-- <span class="error-block"></span> -->
     <div class="inner-form-block">
         <h2 class="form-title">Welcome back! Nice to see you again.</h2>
-        <form action="dashboard" method="POST" class="login-form">
+        <form action="" method="POST" class="login-form" novalidate>
             {{ form.hidden_tag() }}
             <fieldset style="border: none;">
                 <legend></legend>
                 <label for>
-                    <span>Username</span>
+                    <span>Email</span>
                     <div class="input-wrap">
-                        {{ form.username(class="input") }}
-                        <span class="error-span">Please enter a valid username</span>
-                        <div class="input-border"></div>
+                        {% if form.email.errors %}
+                            {{ form.email(class="input") }}                        
+                            {% for error in form.email.errors %}
+                                <span class="error-span">{{ error }}</span>
+                                <div class="input-border error"></div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.email(class="input") }}
+                            <div class="input-border"></div>
+                        {% endif %}
                     </div>
                 </label>
                 <label for>
-                    <span>Passwords</span>  
+                    <span>Password</span>  
                     <div class="input-wrap">
-                        {{ form.password(class="input") }}
-                        <span class="error-span">Please enter a valid password</span>
-                        <div class="input-border"></div>
+                        {% if form.password.errors %}
+                            {{ form.password(class="input") }}                        
+                            {% for error in form.password.errors %}
+                                <span class="error-span">{{ error }}</span>
+                                <div class="input-border error"></div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.password(class="input") }}
+                            <div class="input-border"></div>
+                        {% endif %}
                     </div>
                 </label>
+                <!-- <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div> -->
             </fieldset>
             <label for class="submit-label">
                 <div class="submit-btn">
@@ -50,17 +68,17 @@
             </label>
 
             <!-- <label for>
-                <span>Username</span>
+                <span>email</span>
                 <div class="input-wrap">
                     <input
                         type="text"
-                        name="username"
+                        name="email"
                         class="required input"
-                        id = "username"
-                        placeholder="Please enter your username."
+                        id = "email"
+                        placeholder="Please enter your email."
                         autocomplete = "off"
                     />
-                    <span class="error-span">Please enter a valid username</span>
+                    <span class="error-span">Please enter a valid email</span>
                     <div class="input-border"></div>
                 </div>
             </label>

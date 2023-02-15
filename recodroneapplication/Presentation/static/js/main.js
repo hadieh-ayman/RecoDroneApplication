@@ -26,16 +26,16 @@ menu_link.forEach((input) =>
     input.addEventListener("click", () => { input.classList.toggle("active")})
 );
 
-login_form.addEventListener("submit", (e) => {
-    let error = 0;
-    if ((username.value === "" || username.value !== "admin") && (password.value === "" || password.value !== "pass123")) {
-        error++;
-    }
+// login_form.addEventListener("submit", (e) => {
+//     let error = 0;
+//     if ((username.value === "" || username.value !== "admin") && (password.value === "" || password.value !== "pass123")) {
+//         error++;
+//     }
 
-    if (error > 0) {
-        e.preventDefault();
-        error_message.forEach((error) => {error.classList.add('show')})
-        error_border.forEach((error) => {error.classList.add('error')})
-    }
-});
+//     if (error > 0) {
+//         e.preventDefault();
+//         error_message.forEach((error) => {error.classList.add('show')})
+//         error_border.forEach((error) => {error.classList.add('error')})
+//     }
+// });
 
