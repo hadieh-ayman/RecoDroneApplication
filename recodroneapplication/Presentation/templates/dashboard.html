@@ -35,11 +35,11 @@
                     </a>
                     <nav class="menu-wrap">
                         <div class="account">
-                            <p class="account-name">Hadea0090</p>
+                            <p class="account-name">{{ current_user.username }}</p>
                             <img src="static/img/profile.jpg" alt="" />
                         </div>
                         <div class="logout-link">
-                            <a class="account-logout" href="login">Log Out</a>
+                            <a class="account-logout" href="{{ url_for('logout') }}">Log Out</a>
                         </div>
                     </nav>
                 </div>
@@ -126,8 +126,8 @@
                 </div>
                 <div class="information-container">
                     <div class="title-container">
-                        <p class="clover-serial">C/H15-110RU</p>
-                        <p class="clover-ver">COEX CLOVER 4</p>
+                        <p class="clover-serial">{{ drone.version }}</p>
+                        <p class="clover-ver">{{ drone.name }}</p>
                     </div>
                     <div class="info-border">
                         <div class="title-box">

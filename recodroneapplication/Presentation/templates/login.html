@@ -39,6 +39,12 @@
                             {{ form.email(class="input") }}
                             <div class="input-border"></div>
                         {% endif %}
+                        {% with messages = get_flashed_messages() %}
+                            {% for message in messages %}
+                                <span class="error-span">{{ message }}</span>
+                                <div class="input-border error"></div>
+                            {% endfor %}
+                        {% endwith %}
                     </div>
                 </label>
                 <label for>
@@ -54,54 +60,20 @@
                             {{ form.password(class="input") }}
                             <div class="input-border"></div>
                         {% endif %}
+                        {% with messages = get_flashed_messages() %}
+                            {% for message in messages %}
+                                <span class="error-span">{{ message }}</span>
+                                <div class="input-border error"></div>
+                            {% endfor %}
+                        {% endwith %}
                     </div>
                 </label>
-                <!-- <div class="form-check">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label") }}
-                </div> -->
             </fieldset>
             <label for class="submit-label">
                 <div class="submit-btn">
                     {{ form.submit(class="submit-input") }}
                 </div>
             </label>
-
-            <!-- <label for>
-                <span>email</span>
-                <div class="input-wrap">
-                    <input
-                        type="text"
-                        name="email"
-                        class="required input"
-                        id = "email"
-                        placeholder="Please enter your email."
-                        autocomplete = "off"
-                    />
-                    <span class="error-span">Please enter a valid email</span>
-                    <div class="input-border"></div>
-                </div>
-            </label>
-            <label for>
-                <span>Password</span>
-                <div class="input-wrap">
-                    <input
-                        type="password"
-                        name="password"
-                        class="required input"
-                        id="password"
-                        placeholder="Please enter your password."
-                        autocomplete="off"
-                    />
-                    <span class="error-span">Please enter a valid password</span>
-                    <div class="input-border"></div>
-                </div>
-            </label>
-            <label for class="submit-label">
-              <div class="submit-btn">
-                <input class="submit-input" type="submit" value="login" >
-              </div>
-            </label> -->
         </form>
     </div>
 </section>
