@@ -54,6 +54,7 @@ function stream_start() {
 // ################### Call telemetry service ###################
 
 var telemetry
+var fcu = document.getElementById('fcu')
 
 // Declare get_telemetry service client
 var getTelemetry = new ROSLIB.Service({ 
@@ -71,9 +72,9 @@ getTelemetry.callService(
     telemetry = JSON.parse(telemetry_json);
     
     if(telemetry.connected){
-        document.querySelector('fcu-status').innerHTML = "CONNECTED";
+        fcu.innerHTML = "CONNECTED";
     } else {
-        document.querySelector('fcu-status').innerHTML = "DISCONNECTED";
+        fcu.innerHTML = "DISCONNECTED";
     }
     if(telemetry.armed){
         document.querySelector('arm-status').innerHTML = "ARMED";
