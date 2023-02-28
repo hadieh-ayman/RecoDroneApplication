@@ -167,12 +167,12 @@ main {
     width: 55rem; */
     display: flex;
     justify-content: center;
-    height: 60vh;
+    height: 55vh;
     background-color: black;
 }
 
 .rviz-view img{
-    height: 60vh;
+    height: 55vh;
 }
 
 .dropdown-menu {
@@ -320,6 +320,7 @@ main {
     margin: -1.5rem 0 0 -1.5rem;
     background: #c9d0fd;
     border-radius: 50%;
+    transition: 0.5s;
 }
 
 /* -------------------------------------------------- SPEEDOMETER CSS ------------------------------------------ */
@@ -346,7 +347,6 @@ main {
 }
 
 .gauge-center {
-    content: "";
     color: #fff;
     width: 60%;
     height: 60%;
@@ -358,8 +358,7 @@ main {
     bottom: 0;
 }
 
-.gauge-center::before {
-    content: "11";
+.velocity {
     font-size: 1.5em;
     width: 100%;
     padding: 10px 0 0 0;
@@ -470,8 +469,8 @@ main {
  .switch-box {
     position: absolute;
     top: 0.2rem;
-    left: 0.2rem;
-    width: 5rem;
+    left: 5.6rem;
+    width: 5.4rem;
     height: 1.75rem;
     border-radius: 0.5rem;
     background: var(--lavender-blue);

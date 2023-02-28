@@ -52,7 +52,7 @@
                         </div>
                         <div class="dropdown-menu">
                             <div class="menu-select">
-                                <span class="selected">Camera</span>
+                                <span class="selected">2D Map</span>
                                 <img
                                     src="static/img/arrow-up.svg"
                                     alt=""
@@ -60,7 +60,7 @@
                                 />
                             </div>
                             <ul class="view-menu">
-                                <li class="view-link">2D map</li>
+                                <li class="view-link">Camera</li>
                                 <li class="view-link">3D map</li>
                             </ul>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="outer-circle">
                                 <div class="middle-circle">
                                     <div class="inner-circle">
-                                        <div class="main-circle"></div>
+                                        <div class="main-circle" id="left-circle"></div>
                                     </div>
                                 </div>
                                 <img src="static/img/arrow-up.svg" alt="" class="controller-arrow up">
@@ -90,7 +90,9 @@
                                         <div class="st slice-item"></div>
                                     </div>
                                     <div class="needle"></div>
-                                    <div class="gauge-center"></div>
+                                    <div class="gauge-center">
+                                        <p class="velocity">12</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="switch">
@@ -113,7 +115,7 @@
                             <div class="outer-circle">
                                 <div class="middle-circle">
                                     <div class="inner-circle">
-                                        <div class="main-circle"></div>
+                                        <div class="main-circle" id="right-circle"></div>
                                     </div>
                                 </div>
                                 <img src="static/img/arrow-up.svg" alt="" class="controller-arrow up">
@@ -176,9 +178,9 @@
                                 <div class="battery-dash full"></div>
                                 <div class="battery-dash full"></div>
                                 <div class="battery-dash full"></div>
-                                <div class="battery-dash"></div>
-                                <div class="battery-dash"></div>
-                                <div class="battery-dash"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
+                                <div class="battery-dash full"></div>
                             </div>
                         </div>
                     </div>
