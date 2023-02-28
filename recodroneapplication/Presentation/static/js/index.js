@@ -66,8 +66,9 @@ var getTelemetry = new ROSLIB.Service({
 getTelemetry.callService(
     new ROSLIB.ServiceRequest({ frame_id: 'map' }), function(result) {
     // Service respond callback
-    console.log('Telemetry: ' + JSON.stringify(result));
-    telemetry = JSON.parse(result);
+    telemetry_json = JSON.stringify(result)
+    console.log('Telemetry: ' + telemetry_json);
+    telemetry = JSON.parse(telemetry_json);
     
     if(telemetry.connected){
         document.querySelector('fcu-status').innerHTML = "CONNECTED";
