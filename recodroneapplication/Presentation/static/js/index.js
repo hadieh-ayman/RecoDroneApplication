@@ -55,6 +55,11 @@ function stream_start() {
 
 var telemetry
 var fcu = document.getElementById('fcu')
+var arm = document.getElementById('arm')
+var battery = document.getElementById('battery')
+var coord_x = document.getElementById('x')
+var coord_y = document.getElementById('y')
+var coord_z = document.getElementById('z')
 
 // Declare get_telemetry service client
 var getTelemetry = new ROSLIB.Service({ 
@@ -77,12 +82,12 @@ getTelemetry.callService(
         fcu.innerHTML = "DISCONNECTED";
     }
     if(telemetry.armed){
-        document.querySelector('arm-status').innerHTML = "ARMED";
+        arm.innerHTML = "ARMED";
     } else {
-        document.querySelector('arm-status').innerHTML = "DISARMED";
+        arm.innerHTML = "DISARMED";
     }
-    document.querySelector('battery-status').innerHTML = ((telemetry.cell_voltage/telemetry.voltage) * 100).toFixed(2) + "%";
-    document.querySelector('coord.x').innerHTML = (telemetry.x).toFixed(3);
-    document.querySelector('coord.y').innerHTML = (telemetry.y).toFixed(3);
-    document.querySelector('coord.z').innerHTML = (telemetry.z).toFixed(3);
+    battery.innerHTML = ((telemetry.cell_voltage/telemetry.voltage) * 100).toFixed(2) + "%";
+    coord_x.innerHTML = (telemetry.x).toFixed(3);
+    coord_y.innerHTML = (telemetry.y).toFixed(3);
+    coord_z.innerHTML = (telemetry.z).toFixed(3);
 });
