@@ -50,3 +50,37 @@ function stream_start() {
       document.getElementById('rviz-screen').src = "data:image/jpg;base64," + message.data;
     });
   }
+
+// ################### Call telemetry service ###################
+
+var telemetry
+
+// Declare get_telemetry service client
+var getTelemetry = new ROSLIB.Service({ 
+    ros: ros, 
+    name : '/get_telemetry', 
+    serviceType : 'clover/GetTelemetry'
+});
+
+// Call get_telemetry
+getTelemetry.callService(
+    new ROSLIB.ServiceRequest({ frame_id: 'map' }), function(result) {
+    // Service respond callback
+    console.log('Telemetry: ' + JSON.stringify(result));
+    telemetry = JSON.parse(result);
+    
+    if(telemetry.connected){
+        document.querySelector('fcu-status').innerHTML = "CONNECTED";
+    } else {
+        document.querySelector('fcu-status').innerHTML = "DISCONNECTED";
+    }
+    if(telemetry.armed){
+        document.querySelector('arm-status').innerHTML = "ARMED";
+    } else {
+        document.querySelector('arm-status').innerHTML = "DISARMED";
+    }
+    document.querySelector('battery-status').innerHTML = ((telemetry.cell_voltage/telemetry.voltage) * 100).toFixed(2) + "%";
+    document.querySelector('coord.x').innerHTML = (telemetry.x).toFixed(3);
+    document.querySelector('coord.y').innerHTML = (telemetry.y).toFixed(3);
+    document.querySelector('coord.z').innerHTML = (telemetry.z).toFixed(3);
+});
