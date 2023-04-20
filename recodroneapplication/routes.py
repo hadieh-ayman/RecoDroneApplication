@@ -37,4 +37,3 @@ def dashboard():
     drone = Drone.query.filter_by(owner=current_user).first()
     return render_template('dashboard.html', title='RecoDrone-Dashboard', drone=drone)
 
-
