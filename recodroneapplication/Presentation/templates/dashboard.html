@@ -51,18 +51,11 @@
                             <img id="rviz-screen" src="static/img/stream-placeholder.png" alt="">
                         </div>
                         <div class="dropdown-menu">
-                            <div class="menu-select">
-                                <span class="selected">2D Map</span>
-                                <img
-                                    src="static/img/arrow-up.svg"
-                                    alt=""
-                                    class="menu-arrow"
-                                />
-                            </div>
-                            <ul class="view-menu">
-                                <li class="view-link">Camera</li>
-                                <li class="view-link">3D map</li>
-                            </ul>
+                            <select class="menu-select">
+                                <option value="camera">camera</option>
+                                <option value="2D">2D map</option>
+                                <option value="3D">3D map</option>
+                            </select>
                         </div>
                     </div>
                     <div class="controller-container">
@@ -101,9 +94,9 @@
                                 <button class="switch-button" onclick="rightClick()">Offboard</button>
                             </div>
                             <div class="stop-command">
-                                <div class="loiter">
-                                    <img src="static/img/drone-loiter.svg" alt="" class="loiter-img">
-                                    <p class="loiter-text">LOITER</p>
+                                <div class="takeoff">
+                                    <img src="static/img/drone-loiter.svg" alt="" class="takeoff-img">
+                                    <p class="takeoff-text">TAKEOFF</p>
                                 </div>
                                 <div class="land">
                                     <img src="static/img/plane-land.svg" alt="" class="land-img">

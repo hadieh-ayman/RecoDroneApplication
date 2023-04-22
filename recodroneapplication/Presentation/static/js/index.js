@@ -24,17 +24,40 @@ ros.on("close", function () {
 window.setInterval(function () {
     if (ros.isConnected)
         console.log(ros.isConnected);
-        return;
-    console.log(ros.isConnected);
-    ros.connect(rosbridge_url);
+    else {
+        console.log(ros.isConnected);
+        ros.connect(rosbridge_url);
+    }   
 }, 1000);
 
 // ################### Define image topics ###################
 
-let rviz_stream = new ROSLIB.Topic({
-    ros: ros, name: '/rviz1/camera1/image_compressed/compressed',
-    messageType: 'sensor_msgs/CompressedImage'
-  });
+let menu = document.querySelector('.menu-select');
+let view = menu.value;
+let rviz_stream = new ROSLIB.Topic()
+
+menu.addEventListener('click', function(){
+    switch(view) {
+        case 'camera':
+            rviz_stream = new ROSLIB.Topic({
+                ros: ros, name: '/main_camera/image_raw/compressed',
+                messageType: 'sensor_msgs/CompressedImage'
+              });
+            break;
+        case '2D':
+            rviz_stream = new ROSLIB.Topic({
+                ros: ros, name: '/camera1/image_compressed/compressed',
+                messageType: 'sensor_msgs/CompressedImage'
+              });
+              break;
+        case '3D':
+            rviz_stream = new ROSLIB.Topic({
+                ros: ros, name: '/camera2/image_compressed/compressed',
+                messageType: 'sensor_msgs/CompressedImage'
+              });
+              break;
+    }
+});
 
 // ################### Subscribe to image topics ###################
 
@@ -113,7 +136,7 @@ let navigate = new ROSLIB.Service({
 });
 
 document.addEventListener("keydown", function (e) {
-    if (e.defaultPrevented || finish==false) {
+    if (e.defaultPrevented || !finish) {
       return; // Do nothing if the event was already processed
     }
     switch (e.key) {
@@ -125,7 +148,7 @@ document.addEventListener("keydown", function (e) {
                     alert("Drone is moving 0.5 meters backwards.")
                 }
             });
-        setTimeout(finish=true, 30000);
+        setTimeout(finish, 30000);
         break;
       case "o":
         navigate.callService(
@@ -135,7 +158,7 @@ document.addEventListener("keydown", function (e) {
                     alert("Drone is moving 0.5 meters forward.")
                 }
             });
-        setTimeout(finish=true, 30000)
+        setTimeout(finish, 30000)
         break;
       case "k":
         navigate.callService(
@@ -145,7 +168,7 @@ document.addEventListener("keydown", function (e) {
                     alert("Drone is moving 0.5 meters to the left.")
                 }
             });
-        setTimeout(finish=true, 30000)
+        setTimeout(finish, 30000)
           break;
       case ";":
         navigate.callService(
@@ -155,7 +178,7 @@ document.addEventListener("keydown", function (e) {
                     alert("Drone is moving 0.5 meters to the right.")
                 }
             });
-        setTimeout(finish=true, 30000)
+        setTimeout(finish, 30000)
         break;
       default:
           return;
@@ -164,6 +187,10 @@ document.addEventListener("keydown", function (e) {
   });
 
 document.addEventListener("keyup", function (e) {
+    if (e.defaultPrevented || !finish) {
+        return; // Do nothing if the event was already processed
+      }
+      switch (e.key) {
     case "s":
         navigate.callService(
             new ROSLIB.ServiceRequest({ speed:velocity-0.2, frame_id:'body', auto_arm:True}), function(result){
@@ -172,7 +199,7 @@ document.addEventListener("keyup", function (e) {
                     alert("Drone is moving 0.2 m/s slower.")
                 }
             });
-        setTimeout(finish=true, 30000)
+        setTimeout(finish, 30000)
         break;
       case "w":
             navigate.callService(
@@ -182,7 +209,7 @@ document.addEventListener("keyup", function (e) {
                         alert("Drone is moving 0.2 m/s faster.")
                     }
                 });
-            setTimeout(finish=true, 30000)
+            setTimeout(finish, 30000)
             break;
       case "a":
             navigate.callService(
@@ -192,7 +219,7 @@ document.addEventListener("keyup", function (e) {
                         alert("Drone is rotating 45 degrees clockwise.")
                     }
                 });
-            setTimeout(finish=true, 30000)
+            setTimeout(finish, 30000)
             break;
       case "d":
             navigate.callService(
@@ -202,9 +229,9 @@ document.addEventListener("keyup", function (e) {
                         alert("Drone is rotating 45 degrees anticlockwise.")
                     }
                 });
-            setTimeout(finish=true, 30000)
+            setTimeout(finish, 30000)
             break; 
-});
+}});
 
   function degToRad(deg) {
     return deg * (Math.PI / 180.0);
@@ -216,7 +243,7 @@ let loiter = document.querySelector('.loiter')
 let land = document.querySelector('.land')
 
 // Declare land service client
-let land = new ROSLIB.Service({ 
+let land_service = new ROSLIB.Service({ 
     ros: ros, 
     name : '/land', 
     serviceType : 'std_srvs/Trigger'
@@ -229,8 +256,8 @@ loiter.addEventListener('click', function () {
                 alert("Drone is taking off one meter above ground.")
             }
         });
-    setTimeout(finish=true, 30000)
-}
+    setTimeout(finish, 30000)
+});
 
 land.addEventListener('click', function () {
     land.callService(
@@ -239,6 +266,5 @@ land.addEventListener('click', function () {
                 alert("Drone is landing.")
             }
         });
-    setTimeout(finish=true, 30000)
-}
-
+    setTimeout(finish, 30000)
+});
