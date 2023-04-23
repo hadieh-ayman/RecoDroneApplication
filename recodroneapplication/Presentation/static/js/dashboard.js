@@ -1,17 +1,6 @@
-//dropdown menu
-const dropdown = document.querySelector(".dropdown-menu");
-const select = dropdown.querySelector(".menu-select");
-const arrow = dropdown.querySelector(".menu-arrow");
-const menu = dropdown.querySelector(".view-menu");
-const options = dropdown.querySelectorAll(".view-link");
 let switchbox = document.querySelector(".switch-box");
 let left_controller = document.getElementById("left-circle");
 let right_controller = document.getElementById("right-circle");
-
-select.addEventListener("click", () => {
-  arrow.classList.toggle("rotate");
-  menu.classList.toggle("active");
-});
 
 document.addEventListener("keydown", function (e) {
   if (e.defaultPrevented) {

@@ -32,25 +32,28 @@ window.setInterval(function () {
 
 // ################### Define image topics ###################
 
-let menu = document.querySelector('.menu-select');
-let view = menu.value;
+let view_menu = document.querySelector('.menu-select');
+let view = view_menu.value;
 let rviz_stream = new ROSLIB.Topic()
 
-menu.addEventListener('click', function(){
+view_menu.addEventListener('click', function(){
     switch(view) {
         case 'camera':
+            print("camera is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/main_camera/image_raw/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
             break;
         case '2D':
+            print("2D map is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/camera1/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
               break;
         case '3D':
+            print("3D map is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/camera2/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
@@ -239,7 +242,7 @@ document.addEventListener("keyup", function (e) {
 
 // ################### Land and Takeoff ###################
 
-let loiter = document.querySelector('.loiter')
+let takeoff = document.querySelector('.takeoff')
 let land = document.querySelector('.land')
 
 // Declare land service client
@@ -249,11 +252,12 @@ let land_service = new ROSLIB.Service({
     serviceType : 'std_srvs/Trigger'
 });
 
-loiter.addEventListener('click', function () {
+takeoff.addEventListener('click', function () {
     navigate.callService(
         new ROSLIB.ServiceRequest({ x:0, y:0, z:1, frame_id:'body', auto_arm:True}), function(result){
             if(result.success){
                 alert("Drone is taking off one meter above ground.")
+                print("Drone is taking off one meter above ground.")
             }
         });
     setTimeout(finish, 30000)
@@ -264,6 +268,7 @@ land.addEventListener('click', function () {
         new ROSLIB.ServiceRequest({}), function(result){
             if(result.success){
                 alert("Drone is landing.")
+                print("Drone is landing.")
             }
         });
     setTimeout(finish, 30000)
