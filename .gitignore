@@ -1,3 +1,4 @@
 
 recodroneapplication/__pycache__/routes.cpython-310.pyc
 recodroneapplication/__pycache__/models.cpython-310.pyc
+*.pyc

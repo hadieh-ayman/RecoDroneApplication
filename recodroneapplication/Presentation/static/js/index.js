@@ -33,27 +33,27 @@ window.setInterval(function () {
 // ################### Define image topics ###################
 
 let view_menu = document.querySelector('.menu-select');
-let view = view_menu.value;
-let rviz_stream = new ROSLIB.Topic()
+let rviz_stream = undefined;
 
 view_menu.addEventListener('click', function(){
-    switch(view) {
+    console.log(view_menu.value)
+    switch(view_menu.value) {
         case 'camera':
-            print("camera is broadcasting")
+            console.log("camera is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/main_camera/image_raw/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
             break;
         case '2D':
-            print("2D map is broadcasting")
+            console.log("2D map is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/camera1/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
               break;
         case '3D':
-            print("3D map is broadcasting")
+            console.log("3D map is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/camera2/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
@@ -145,7 +145,7 @@ document.addEventListener("keydown", function (e) {
     switch (e.key) {
       case "l":
         navigate.callService(
-            new ROSLIB.ServiceRequest({ x: 0, y:-0.5, z:0, frame_id:'body', auto_arm:True}), function(result){
+            new ROSLIB.ServiceRequest({ x: 0, y:-0.5, z:0, frame_id:'body', auto_arm:true}), function(result){
                 if(result.success){
                     finish = false;
                     alert("Drone is moving 0.5 meters backwards.")
@@ -155,7 +155,7 @@ document.addEventListener("keydown", function (e) {
         break;
       case "o":
         navigate.callService(
-            new ROSLIB.ServiceRequest({ x: 0, y:0.5, z:0, frame_id:'body', auto_arm:True}), function(result){
+            new ROSLIB.ServiceRequest({ x: 0, y:0.5, z:0, frame_id:'body', auto_arm:true}), function(result){
                 if(result.success){
                     finish = false
                     alert("Drone is moving 0.5 meters forward.")
@@ -165,7 +165,7 @@ document.addEventListener("keydown", function (e) {
         break;
       case "k":
         navigate.callService(
-            new ROSLIB.ServiceRequest({ x:-0.5, y:0, z:0, frame_id:'body', auto_arm:True}), function(result){
+            new ROSLIB.ServiceRequest({ x:-0.5, y:0, z:0, frame_id:'body', auto_arm:true}), function(result){
                 if(result.success){
                     finish = false
                     alert("Drone is moving 0.5 meters to the left.")
@@ -175,7 +175,7 @@ document.addEventListener("keydown", function (e) {
           break;
       case ";":
         navigate.callService(
-            new ROSLIB.ServiceRequest({ x:0.5, y:0, z:0, frame_id:'body', auto_arm:True}), function(result){
+            new ROSLIB.ServiceRequest({ x:0.5, y:0, z:0, frame_id:'body', auto_arm:true}), function(result){
                 if(result.success){
                     finish = false
                     alert("Drone is moving 0.5 meters to the right.")
@@ -196,7 +196,7 @@ document.addEventListener("keyup", function (e) {
       switch (e.key) {
     case "s":
         navigate.callService(
-            new ROSLIB.ServiceRequest({ speed:velocity-0.2, frame_id:'body', auto_arm:True}), function(result){
+            new ROSLIB.ServiceRequest({ speed:velocity-0.2, frame_id:'body', auto_arm:true}), function(result){
                 if(result.success){
                     finish = false
                     alert("Drone is moving 0.2 m/s slower.")
@@ -206,7 +206,7 @@ document.addEventListener("keyup", function (e) {
         break;
       case "w":
             navigate.callService(
-                new ROSLIB.ServiceRequest({ speed:velocity+0.2, frame_id:'body', auto_arm:True}), function(result){
+                new ROSLIB.ServiceRequest({ speed:velocity+0.2, frame_id:'body', auto_arm:true}), function(result){
                     if(result.success){
                         finish = false
                         alert("Drone is moving 0.2 m/s faster.")
@@ -216,7 +216,7 @@ document.addEventListener("keyup", function (e) {
             break;
       case "a":
             navigate.callService(
-                new ROSLIB.ServiceRequest({ yaw:degToRad(-45), frame_id:'body', auto_arm:True}), function(result){
+                new ROSLIB.ServiceRequest({ yaw:degToRad(-45), frame_id:'body', auto_arm:true}), function(result){
                     if(result.success){
                         finish = false
                         alert("Drone is rotating 45 degrees clockwise.")
@@ -226,7 +226,7 @@ document.addEventListener("keyup", function (e) {
             break;
       case "d":
             navigate.callService(
-                new ROSLIB.ServiceRequest({ yaw:degToRad(45), frame_id:'body', auto_arm:True}), function(result){
+                new ROSLIB.ServiceRequest({ yaw:degToRad(45), frame_id:'body', auto_arm:true}), function(result){
                     if(result.success){
                         finish = false
                         alert("Drone is rotating 45 degrees anticlockwise.")
@@ -253,22 +253,24 @@ let land_service = new ROSLIB.Service({
 });
 
 takeoff.addEventListener('click', function () {
+    console.log("takeoff operation started")
     navigate.callService(
-        new ROSLIB.ServiceRequest({ x:0, y:0, z:1, frame_id:'body', auto_arm:True}), function(result){
+        new ROSLIB.ServiceRequest({ x:0, y:0, z:1, frame_id:'body', auto_arm:true}), function(result){
             if(result.success){
                 alert("Drone is taking off one meter above ground.")
-                print("Drone is taking off one meter above ground.")
+                console.log("Drone is taking off one meter above ground.")
             }
         });
     setTimeout(finish, 30000)
 });
 
 land.addEventListener('click', function () {
-    land.callService(
+    console.log("landing operation started.")
+    land_service.callService(
         new ROSLIB.ServiceRequest({}), function(result){
             if(result.success){
                 alert("Drone is landing.")
-                print("Drone is landing.")
+                console.log("Drone is landing.")
             }
         });
     setTimeout(finish, 30000)
