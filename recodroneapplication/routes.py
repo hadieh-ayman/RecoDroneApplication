@@ -5,7 +5,7 @@ from recodroneapplication.models import User, Drone
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-@app.route('/')
+
 @app.route('/home')
 def home():
     return render_template('home.html', title='RecoDrone')
@@ -30,9 +30,9 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-
+@app.route('/')
 @app.route('/dashboard')
-@login_required
+# @login_required
 def dashboard():
     drone = Drone.query.filter_by(owner=current_user).first()
     return render_template('dashboard.html', title='RecoDrone-Dashboard', drone=drone)

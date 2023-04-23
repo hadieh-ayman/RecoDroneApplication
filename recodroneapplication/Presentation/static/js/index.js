@@ -44,13 +44,15 @@ view_menu.addEventListener('click', function(){
                 ros: ros, name: '/main_camera/image_raw/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
-            break;
+              stream_start();
+              break;
         case '2D':
             console.log("2D map is broadcasting")
             rviz_stream = new ROSLIB.Topic({
                 ros: ros, name: '/camera1/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
+              stream_start();
               break;
         case '3D':
             console.log("3D map is broadcasting")
@@ -58,6 +60,7 @@ view_menu.addEventListener('click', function(){
                 ros: ros, name: '/camera2/image_compressed/compressed',
                 messageType: 'sensor_msgs/CompressedImage'
               });
+              stream_start();
               break;
     }
 });
