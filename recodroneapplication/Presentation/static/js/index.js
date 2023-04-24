@@ -146,11 +146,11 @@ let cmd_vel_listener = new ROSLIB.Topic({
   messageType: "geometry_msgs/Twist",
 });
 
-let move = function (linear, angular) {
+let move = function (linear_x, linear_y, angular) {
   let twist = new ROSLIB.Message({
     linear: {
-      x: linear,
-      y: 0,
+      x: linear_x,
+      y: linear_y,
       z: 0,
     },
     angular: {
@@ -171,6 +171,7 @@ let createJoystick = function () {
     threshold: 0.1,
     size: 80,
     restOpacity: 1,
+    lockX: true,
   });
 
   let joystickR = nipplejs.create({
@@ -183,33 +184,48 @@ let createJoystick = function () {
     restOpacity: 1,
   });
 
-  let linear_speed = 0;
+  let linear_speed_x = 0;
+  let linear_speed_y = 0;
   let angular_speed = 0;
   var timer;
 
   joystickL.on("start", function (event, nipple) {
     timer = setInterval(function () {
-      move(linear_speed, 0);
+      move(0, 0, angular_speed);
+    }, 25);
+  });
+
+  joystickR.on("start", function (event, nipple) {
+    timer = setInterval(function () {
+      move(linear_speed_x, linear_speed_y, 0);
     }, 25);
   });
 
   joystickL.on("move", function (event, nipple) {
-    max_linear = 5.0; // m/s
     max_angular = 2.0; // rad/s
-    max_distance = 75.0; // pixels;
-    linear_speed =
-      (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
-      max_distance;
-    // angular_speed =
-    //   (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
-    //   max_distance;
+    max_distance = 40.0; // pixels;
+    angular_speed = (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) / max_distance;
+  });
+
+  joystickR.on("move", function (event, nipple) {
+    max_linear = 5.0; // m/s
+    max_distance = 40.0; // pixels;
+    linear_speed_x = (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) / max_distance;
+    linear_speed_y = (-Math.cos(nipple.angle.radian) * max_linear * nipple.distance) / max_distance;
   });
 
   joystickL.on("end", function () {
     if (timer) {
       clearInterval(timer);
     }
-    move(0, 0);
+    move(0, 0, 0);
+  });
+
+  joystickR.on("end", function () {
+    if (timer) {
+      clearInterval(timer);
+    }
+    move(0, 0, 0);
   });
 };
 

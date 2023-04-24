@@ -1,1 +1,0 @@
-var manager = require('nipplejs').create(options);
