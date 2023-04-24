@@ -44,6 +44,13 @@
       </div>
       <div class="container">
         <div class="viewer-controller-container">
+          <div class="popup active">
+            <img class="alert-close" src="../static/img/close.svg" alt="">
+            <div class="alert-item">
+              <div class="alert-circle"></div>
+              <p class="alert-text">ROS is not connected.</p>
+            </div>
+          </div>
           <div class="viewer-container">
             <div class="rviz-view">
               <img
@@ -249,11 +256,7 @@
     </main>
     <script src="../static/js/eventemitter2.min.js"></script>
     <script src="../static/js/roslib.min.js"></script>
+    <script type="text/javascript" src="../static/js/nipplejs.js"></script>
     <script type="text/javascript" src="static/js/dashboard.js"></script>
-    <script type="text/javascript" src="static/js/index.js"></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"
-    ></script>
   </body>
 </html>

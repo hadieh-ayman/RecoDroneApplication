@@ -141,6 +141,85 @@ main {
     color: var(--melon);
     text-shadow: 0px 0px 2px var(--melon);
 }
+/* -------------------------------------------------- POPUP CSS --------------------------------------------- */
+
+.popup {
+    z-index: 5;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 23rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1rem 1rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #361e7c;
+    background: #0c0826;
+    transition: all 0.4s;
+    opacity: 0;
+}
+
+.popup.active {
+    opacity: 1;
+}
+
+.alert-close {
+    position: absolute;
+    top: 10%;
+    left: 90%;
+    height: 1.5rem;
+    filter: invert(67%) sepia(34%) saturate(418%) hue-rotate(296deg) brightness(91%) contrast(83%);
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+.alert-item {
+    display: flex;
+    padding: 0.5rem 0rem;
+}
+
+.alert-circle {
+    height: 1rem;
+    width: 1rem;
+    margin: 0rem 0.5rem;
+    background: #DB6D87;
+    border-radius: 50%;
+    animation-name: alert-circle;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.alert-circle.success {
+    background: var(--sky-cyan);
+    animation-name: alert-pause;
+}
+
+.alert-circle.loading {
+    background: var(--pearly-purple);
+}
+
+@keyframes alert-circle {
+    0%   {opacity: 1;}
+    20%  {opacity: 0;}
+    40%  {opacity: 1;}
+    60%  {opacity: 0;}
+    80%  {opacity: 1;}
+    100% {opacity: 0;}
+  }
+
+@keyframes alert-pause {
+    0%   {opacity: 1;}
+}
+
+.alert-text {
+    color: var(--lavender-blue);
+    padding-left: 1rem;
+}
 
 /* -------------------------------------------------- VIEWER CSS --------------------------------------------- */
 
