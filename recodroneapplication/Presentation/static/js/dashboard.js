@@ -306,7 +306,7 @@ let getTelemetry = new ROSLIB.Service({
 });
 
 // Call get_telemetry
-getTelemetry.callService(
+let telemetry_service = getTelemetry.callService(
   new ROSLIB.ServiceRequest({ frame_id: "map" }),
   function (result) {
     // Service respond callback
@@ -336,3 +336,5 @@ getTelemetry.callService(
     needle.style.transform = "rotate(" + degree + "deg)";
   }
 );
+
+window.setInterval(telemetry_service, 1000);
