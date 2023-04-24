@@ -1,213 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href={{ url_for( "static" ,
-        filename="css/dashboard.css") }} />
-        <title>Dashboard</title>
-    </head>
-    <body>  
-        <main>
-            <div class="header">
-                <div class="header-container">
-                    <a href="/" class="logo">
-                        <img
-                            class="logo-image"
-                            src="static/img/logo.svg"
-                            alt="logo"
-                        />
-                    </a>
-                    <nav class="menu-wrap">
-                        <div class="account">
-                            <p class="account-name">{{ current_user.username }}</p>
-                            <img src="static/img/profile.jpg" alt="" />
-                        </div>
-                        <div class="logout-link">
-                            <a class="account-logout" href="{{ url_for('logout') }}">Log Out</a>
-                        </div>
-                    </nav>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href={{ url_for( "static" ,
+    filename="css/dashboard.css") }} />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <main>
+      <div class="header">
+        <div class="header-container">
+          <a href="/" class="logo">
+            <img class="logo-image" src="static/img/logo.svg" alt="logo" />
+          </a>
+          <nav class="menu-wrap">
+            <div class="account">
+              <p class="account-name">{{ current_user.username }}</p>
+              <img src="static/img/profile.jpg" alt="" />
             </div>
-            <div class="container">
-                <div class="viewer-controller-container">
-                    <div class="viewer-container">
-                        <div class="rviz-view">
-                            <img id="rviz-screen" src="static/img/stream-placeholder.png" alt="">
-                        </div>
-                        <div class="dropdown-menu">
-                            <select class="menu-select">
-                                <option value="camera">camera</option>
-                                <option value="2D">2D map</option>
-                                <option value="3D">3D map</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="controller-container">
-                        <div class="left-controller">
-                            <div class="outer-circle">
-                                <div class="middle-circle">
-                                    <div class="inner-circle">
-                                        <div class="main-circle" id="left-circle"></div>
-                                    </div>
-                                </div>
-                                <img src="static/img/arrow-up.svg" alt="" class="controller-arrow up">
-                                <img src="static/img/arrow-right.svg" alt="" class="controller-arrow right">
-                                <img src="static/img/arrow-down.svg" alt="" class="controller-arrow down">
-                                <img src="static/img/arrow-left.svg" alt="" class="controller-arrow left">
-                            </div>
-                        </div>
-                        <div class="speed-container">
-                            <div class="speedometer">
-                                <div class="gauge">
-                                    <div class="slice-colors">
-                                        <div class="st slice-item"></div>
-                                        <div class="st slice-item"></div>
-                                        <div class="st slice-item"></div>
-                                        <div class="st slice-item"></div>
-                                        <div class="st slice-item"></div>
-                                    </div>
-                                    <div class="needle"></div>
-                                    <div class="gauge-center">
-                                        <p class="velocity">12</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="switch">
-                                <div class="switch-box"></div>
-                                <button class="switch-button" onclick="leftClick()">Manual</button>
-                                <button class="switch-button" onclick="rightClick()">Offboard</button>
-                            </div>
-                            <div class="stop-command">
-                                <div class="takeoff">
-                                    <img src="static/img/drone-loiter.svg" alt="" class="takeoff-img">
-                                    <p class="takeoff-text">TAKEOFF</p>
-                                </div>
-                                <div class="land">
-                                    <img src="static/img/plane-land.svg" alt="" class="land-img">
-                                    <p class="land-text">LAND</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right controller">
-                            <div class="outer-circle">
-                                <div class="middle-circle">
-                                    <div class="inner-circle">
-                                        <div class="main-circle" id="right-circle"></div>
-                                    </div>
-                                </div>
-                                <img src="static/img/arrow-up.svg" alt="" class="controller-arrow up">
-                                <img src="static/img/arrow-right.svg" alt="" class="controller-arrow right">
-                                <img src="static/img/arrow-down.svg" alt="" class="controller-arrow down">
-                                <img src="static/img/arrow-left.svg" alt="" class="controller-arrow left">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="information-container">
-                    <div class="title-container">
-                        <p class="clover-serial">{{ drone.version }}</p>
-                        <p class="clover-ver">{{ drone.name }}</p>
-                    </div>
-                    <div class="info-border">
-                        <div class="title-box">
-                            <p class="title-text">COEX FCU PIX</p>
-                        </div>
-                        <div class="content-box">
-                            <img src="static/img/device-ram.svg" alt="" class="fcu-img">
-                            <p class="fcu-status" id="fcu">CONNECTED</p>
-                        </div>
-                    </div>
-                    <div class="info-break"></div>
-                    <div class="info-border">
-                        <div class="title-box">
-                            <p class="title-text">DRONE STATE</p>
-                        </div>
-                        <div class="content-box">
-                            <img src="static/img/armed.svg" alt="" class="arm-img">
-                            <p class="arm-status" id="arm">UNARMED</p>
-                        </div>
-                    </div>
-                    <div class="info-break"></div>
-                    <div class="info-border">
-                        <div class="title-box">
-                            <p class="title-text">FLYING FOR</p>
-                        </div>
-                        <div class="content-box">
-                            <img src="static/img/timer.svg" alt="" class="time-img">
-                            <p class="time-status">00:02:43</p>
-                        </div>
-                    </div>
-                    <div class="info-break"></div>
-                    <div class="info-border">
-                        <div class="title-box">
-                            <p class="title-text">BATTERY</p>
-                        </div>
-                        <div class="content-box column">
-                            <div class="battery-num">
-                                <img src="static/img/battery.svg" alt="" class="battery-img">
-                                <p class="battery-status" id="battery">70%</p>
-                            </div>
-                            <div class="battery-perc">
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                                <div class="battery-dash full"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-break"></div>
-                    <div class="info-border">
-                        <div class="title-box">
-                            <p class="title-text">Local Coordinates</p>
-                        </div>
-                        <div class="content-box column">
-                            <div class="coordinate-box">
-                                <img src="static/img/axis-x-letter.svg" alt="" class="letter">
-                                <img src="static/img/axis-x.svg" alt="" class="graph">
-                                <p class="coord x" id="x">0.327 M</p>
-                            </div>
-                            <div class="coordinate-box">
-                                <img src="static/img/axis-y-letter.svg" alt="" class="letter">
-                                <img src="static/img/axis-y.svg" alt="" class="graph">
-                                <p class="coord y" id="y">2.348 M</p>
-                            </div>
-                            <div class="coordinate-box">
-                                <img src="static/img/axis-z-letter.svg" alt="" class="letter">
-                                <img src="static/img/axis-z.svg" alt="" class="graph">
-                                <p class="coord z" id="z">0.859 M</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-break"></div>
-                    <div class="footer">RecoDrone©. All Rights Reserved.</div>
-                </div>
+            <div class="logout-link">
+              <a class="account-logout" href="{{ url_for('logout') }}"
+                >Log Out</a
+              >
             </div>
-        </main>
-        <script src="../static/js/eventemitter2.min.js"></script>
-	    <script src="../static/js/roslib.min.js"></script>
-        <script type="text/javascript" src="static/js/dashboard.js"></script>
-        <script type="text/javascript" src="static/js/index.js"></script>
-    </body>
+          </nav>
+        </div>
+      </div>
+      <div class="container">
+        <div class="viewer-controller-container">
+          <div class="viewer-container">
+            <div class="rviz-view">
+              <img
+                id="rviz-screen"
+                src="static/img/stream-placeholder.png"
+                alt=""
+              />
+            </div>
+            <div class="dropdown-menu">
+              <select class="menu-select">
+                <option value="camera">camera</option>
+                <option value="2D">2D map</option>
+                <option value="3D">3D map</option>
+              </select>
+            </div>
+          </div>
+          <div class="controller-container">
+            <div class="left-controller">
+              <div class="outer-circle">
+                <div class="middle-circle">
+                  <div id="left_joystick" style="position: relative"></div>
+                </div>
+                <img
+                  src="static/img/arrow-up.svg"
+                  alt=""
+                  class="controller-arrow up"
+                />
+                <img
+                  src="static/img/arrow-right.svg"
+                  alt=""
+                  class="controller-arrow right"
+                />
+                <img
+                  src="static/img/arrow-down.svg"
+                  alt=""
+                  class="controller-arrow down"
+                />
+                <img
+                  src="static/img/arrow-left.svg"
+                  alt=""
+                  class="controller-arrow left"
+                />
+              </div>
+            </div>
+            <div class="speed-container">
+              <div class="speedometer">
+                <div class="gauge">
+                  <div class="slice-colors">
+                    <div class="st slice-item"></div>
+                    <div class="st slice-item"></div>
+                    <div class="st slice-item"></div>
+                    <div class="st slice-item"></div>
+                    <div class="st slice-item"></div>
+                  </div>
+                  <div class="needle"></div>
+                  <div class="gauge-center">
+                    <p class="velocity">12</p>
+                  </div>
+                </div>
+              </div>
+              <div class="switch">
+                <div class="switch-box"></div>
+                <button class="switch-button" onclick="leftClick()">
+                  Manual
+                </button>
+                <button class="switch-button" onclick="rightClick()">
+                  Offboard
+                </button>
+              </div>
+              <div class="stop-command">
+                <div class="takeoff">
+                  <img
+                    src="static/img/drone-loiter.svg"
+                    alt=""
+                    class="takeoff-img"
+                  />
+                  <p class="takeoff-text">TAKEOFF</p>
+                </div>
+                <div class="land">
+                  <img
+                    src="static/img/plane-land.svg"
+                    alt=""
+                    class="land-img"
+                  />
+                  <p class="land-text">LAND</p>
+                </div>
+              </div>
+            </div>
+            <div class="right controller">
+              <div class="outer-circle">
+                <div class="middle-circle">
+                  <div id="right_joystick" style="position: relative"></div>
+                </div>
+                <img
+                  src="static/img/arrow-up.svg"
+                  alt=""
+                  class="controller-arrow up"
+                />
+                <img
+                  src="static/img/arrow-right.svg"
+                  alt=""
+                  class="controller-arrow right"
+                />
+                <img
+                  src="static/img/arrow-down.svg"
+                  alt=""
+                  class="controller-arrow down"
+                />
+                <img
+                  src="static/img/arrow-left.svg"
+                  alt=""
+                  class="controller-arrow left"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="information-container">
+          <div class="title-container">
+            <p class="clover-serial">{{ drone.version }}</p>
+            <p class="clover-ver">{{ drone.name }}</p>
+          </div>
+          <div class="info-border">
+            <div class="title-box">
+              <p class="title-text">COEX FCU PIX</p>
+            </div>
+            <div class="content-box">
+              <img src="static/img/device-ram.svg" alt="" class="fcu-img" />
+              <p class="fcu-status" id="fcu">CONNECTED</p>
+            </div>
+          </div>
+          <div class="info-break"></div>
+          <div class="info-border">
+            <div class="title-box">
+              <p class="title-text">DRONE STATE</p>
+            </div>
+            <div class="content-box">
+              <img src="static/img/armed.svg" alt="" class="arm-img" />
+              <p class="arm-status" id="arm">UNARMED</p>
+            </div>
+          </div>
+          <div class="info-break"></div>
+          <div class="info-border">
+            <div class="title-box">
+              <p class="title-text">FLYING FOR</p>
+            </div>
+            <div class="content-box">
+              <img src="static/img/timer.svg" alt="" class="time-img" />
+              <p class="time-status">00:02:43</p>
+            </div>
+          </div>
+          <div class="info-break"></div>
+          <div class="info-border">
+            <div class="title-box">
+              <p class="title-text">BATTERY</p>
+            </div>
+            <div class="content-box column">
+              <div class="battery-num">
+                <img src="static/img/battery.svg" alt="" class="battery-img" />
+                <p class="battery-status" id="battery">70%</p>
+              </div>
+              <div class="battery-perc">
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+                <div class="battery-dash full"></div>
+              </div>
+            </div>
+          </div>
+          <div class="info-break"></div>
+          <div class="info-border">
+            <div class="title-box">
+              <p class="title-text">Local Coordinates</p>
+            </div>
+            <div class="content-box column">
+              <div class="coordinate-box">
+                <img src="static/img/axis-x-letter.svg" alt="" class="letter" />
+                <img src="static/img/axis-x.svg" alt="" class="graph" />
+                <p class="coord x" id="x">0.327 M</p>
+              </div>
+              <div class="coordinate-box">
+                <img src="static/img/axis-y-letter.svg" alt="" class="letter" />
+                <img src="static/img/axis-y.svg" alt="" class="graph" />
+                <p class="coord y" id="y">2.348 M</p>
+              </div>
+              <div class="coordinate-box">
+                <img src="static/img/axis-z-letter.svg" alt="" class="letter" />
+                <img src="static/img/axis-z.svg" alt="" class="graph" />
+                <p class="coord z" id="z">0.859 M</p>
+              </div>
+            </div>
+          </div>
+          <div class="info-break"></div>
+          <div class="footer">RecoDrone©. All Rights Reserved.</div>
+        </div>
+      </div>
+    </main>
+    <script src="../static/js/eventemitter2.min.js"></script>
+    <script src="../static/js/roslib.min.js"></script>
+    <script type="text/javascript" src="static/js/dashboard.js"></script>
+    <script type="text/javascript" src="static/js/index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"
+    ></script>
+  </body>
 </html>

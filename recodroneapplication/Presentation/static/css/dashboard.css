@@ -324,6 +324,18 @@ main {
     border-radius: 50%;
     transition: 0.5s;
 }
+#left_joystick, #right_joystick {
+    top: 50%
+}
+
+#left_joystick .back, #right_joystick .back {
+    background: #804ef6 !important;
+}
+
+#left_joystick .front, #right_joystick .front {
+    background: #c9d0fd !important;
+    opacity: 1 !important;
+}
 
 /* -------------------------------------------------- SPEEDOMETER CSS ------------------------------------------ */
 
