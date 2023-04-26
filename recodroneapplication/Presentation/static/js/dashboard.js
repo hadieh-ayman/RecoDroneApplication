@@ -40,10 +40,10 @@ ros.on("close", function () {
 //Handle ROS connection
 window.setInterval(function () {
   if (ros.isConnected) {
-    console.log(ros.isConnected);
+    // console.log(ros.isConnected);
   } else {
-    console.log(ros.isConnected);
-    // popup.classList.add('active')
+    // console.log(ros.isConnected);
+    popup.classList.add('active')
     ros.connect(rosbridge_url);
   }
 }, 1000);
@@ -196,7 +196,7 @@ let createJoystick = function () {
   });
 
   joystickL.on("move", function (event, nipple) {
-    max_angular = 2.0; // rad/s
+    max_angular = 1.0; // rad/s
     max_distance = 40.0; // pixels;
     angular_speed =
       (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
@@ -204,7 +204,7 @@ let createJoystick = function () {
   });
 
   joystickR.on("move", function (event, nipple) {
-    max_linear = 2.0; // m/s
+    max_linear = 0.5; // m/s
     max_distance = 40.0; // pixels;
     linear_speed_x =
       (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
@@ -309,6 +309,9 @@ let getTelemetry = new ROSLIB.Service({
 let telemetry_service = getTelemetry.callService(
   new ROSLIB.ServiceRequest({ frame_id: "map" }),
   function (result) {
+    if (result.success) {
+      console.log("telemetry received")
+    }
     // Service respond callback
     let telemetry_json = JSON.stringify(result);
     console.log("Telemetry: " + telemetry_json);
