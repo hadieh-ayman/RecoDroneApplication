@@ -236,6 +236,8 @@ window.onload = function () {
 // ################### Land and Takeoff ###################
 
 let finish = true;
+let sec = 0;
+let counting = undefined;
 let takeoff = document.querySelector(".takeoff");
 let land = document.querySelector(".land");
 
@@ -267,7 +269,7 @@ takeoff.addEventListener("click", function () {
         popup.classList.add("active");
         popup.classList.add("loading");
         popup_text.innerHTML = `Drone is taking off one meter above ground.`;
-        console.log("Drone is taking off one meter above ground.");
+        start_timer();
       }
     }
   );
@@ -280,10 +282,30 @@ land.addEventListener("click", function () {
       popup.classList.add("active");
       popup.classList.add("loading");
       popup_text.innerHTML = `Drone is landing.`;
+      end_timer();
     }
   });
   setTimeout(finish, 30000);
 });
+
+let start_timer = function () {
+  function pad(val) {
+    return val > 9 ? val : "0" + val;
+  }
+    counting = setInterval(function () {
+      document.getElementById("seconds").innerHTML = pad(++sec % 60);
+      document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+      document.getElementById("hours").innerHTML = pad(parseInt(sec / 360, 10));
+    }, 1000);
+};
+
+let end_timer = function () {
+  document.getElementById("seconds").innerHTML = `00`;
+  document.getElementById("minutes").innerHTML = `00`;
+  document.getElementById("hours").innerHTML = `00`;
+  sec = 0;
+  clearInterval(counting)
+};
 
 // ################### Call telemetry service ###################
 

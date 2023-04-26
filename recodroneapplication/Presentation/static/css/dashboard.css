@@ -684,21 +684,34 @@ main {
     width: 2rem;
 }
 
-.content-box p {
+.time-status, .battery-status{
     font-size: 1.3rem;
     color: var(--sky-cyan)
 }
 
+.fcu-status, .arm-status {
+    font-size: 1.3rem;
+    color:#DB6D87;
+}
+
+.fcu-status.success, .arm-status.success{
+    color: var(--sky-cyan) !important;
+}
+
 .fcu-img {
-    filter: invert(84%) sepia(37%) saturate(398%) hue-rotate(131deg) brightness(86%) contrast(89%);
+    filter: invert(51%) sepia(97%) saturate(321%) hue-rotate(298deg) brightness(89%) contrast(93%);
+}
+
+.fcu-img.success {
+    filter: invert(84%) sepia(37%) saturate(398%) hue-rotate(131deg) brightness(86%) contrast(89%) !important;
 }
 
 .arm-img {
     filter: invert(51%) sepia(97%) saturate(321%) hue-rotate(298deg) brightness(89%) contrast(93%);
 }
 
-.arm-status {
-    color: #DB6D87 !important;
+.arm-img.success {
+    filter: invert(84%) sepia(37%) saturate(398%) hue-rotate(131deg) brightness(86%) contrast(89%) !important;
 }
 
 .time-img, .battery-img {

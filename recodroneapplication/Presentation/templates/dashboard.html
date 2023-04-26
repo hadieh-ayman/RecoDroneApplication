@@ -45,7 +45,7 @@
       <div class="container">
         <div class="viewer-controller-container">
           <div class="popup active">
-            <img class="alert-close" src="../static/img/close.svg" alt="">
+            <img class="alert-close" src="../static/img/close.svg" alt="" />
             <div class="alert-item">
               <div class="alert-circle"></div>
               <p class="alert-text">ROS is not connected.</p>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="needle"></div>
                   <div class="gauge-center">
-                    <p class="velocity">12</p>
+                    <p class="velocity">0.0</p>
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@
             </div>
             <div class="content-box">
               <img src="static/img/device-ram.svg" alt="" class="fcu-img" />
-              <p class="fcu-status" id="fcu">CONNECTED</p>
+              <p class="fcu-status" id="fcu">NOT CONNECTED</p>
             </div>
           </div>
           <div class="info-break"></div>
@@ -199,7 +199,9 @@
             </div>
             <div class="content-box">
               <img src="static/img/timer.svg" alt="" class="time-img" />
-              <p class="time-status">00:02:43</p>
+              <p class="time-status">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+              </p>
             </div>
           </div>
           <div class="info-break"></div>
@@ -210,7 +212,7 @@
             <div class="content-box column">
               <div class="battery-num">
                 <img src="static/img/battery.svg" alt="" class="battery-img" />
-                <p class="battery-status" id="battery">70%</p>
+                <p class="battery-status" id="battery">00%</p>
               </div>
               <div class="battery-perc">
                 <div class="battery-dash full"></div>
@@ -235,17 +237,17 @@
               <div class="coordinate-box">
                 <img src="static/img/axis-x-letter.svg" alt="" class="letter" />
                 <img src="static/img/axis-x.svg" alt="" class="graph" />
-                <p class="coord x" id="x">0.327 M</p>
+                <p class="coord x" id="x">0.000 M</p>
               </div>
               <div class="coordinate-box">
                 <img src="static/img/axis-y-letter.svg" alt="" class="letter" />
                 <img src="static/img/axis-y.svg" alt="" class="graph" />
-                <p class="coord y" id="y">2.348 M</p>
+                <p class="coord y" id="y">0.000 M</p>
               </div>
               <div class="coordinate-box">
                 <img src="static/img/axis-z-letter.svg" alt="" class="letter" />
                 <img src="static/img/axis-z.svg" alt="" class="graph" />
-                <p class="coord z" id="z">0.859 M</p>
+                <p class="coord z" id="z">0.000 M</p>
               </div>
             </div>
           </div>
