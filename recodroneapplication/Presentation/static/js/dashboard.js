@@ -41,10 +41,9 @@ ros.on("close", function () {
 window.setInterval(function () {
   if (ros.isConnected) {
     // console.log(ros.isConnected);
-    telemetry_service()
   } else {
     // console.log(ros.isConnected);
-    popup.classList.add('active')
+    popup.classList.add("active");
     ros.connect(rosbridge_url);
   }
 }, 1000);
@@ -307,36 +306,40 @@ let getTelemetry = new ROSLIB.Service({
 });
 
 // Call get_telemetry
-let telemetry_service = getTelemetry.callService(
-  new ROSLIB.ServiceRequest({ frame_id: "map" }),
-  function (result) {
-    if (result.success) {
-      console.log("telemetry received")
-    }
-    // Service respond callback
-    let telemetry_json = JSON.stringify(result);
-    console.log("Telemetry: " + telemetry_json);
-    telemetry = JSON.parse(telemetry_json);
+window.setInterval(function () {
+  getTelemetry.callService(
+    new ROSLIB.ServiceRequest({ frame_id: "map" }),
+    function (result) {
+      if (result.success) {
+        console.log("telemetry received");
+      }
+      // Service respond callback
+      let telemetry_json = JSON.stringify(result);
+      console.log("Telemetry: " + telemetry_json);
+      telemetry = JSON.parse(telemetry_json);
 
-    if (telemetry.connected) {
-      fcu.innerHTML = "CONNECTED";
-    } else {
-      fcu.innerHTML = "DISCONNECTED";
-    }
-    if (telemetry.armed) {
-      arm.innerHTML = "ARMED";
-    } else {
-      arm.innerHTML = "DISARMED";
-    }
-    battery.innerHTML =
-      ((telemetry.cell_voltage / telemetry.voltage) * 100).toFixed(0) + "%";
-    coord_x.innerHTML = telemetry.x.toFixed(3) + " M";
-    coord_y.innerHTML = telemetry.y.toFixed(3) + " M";
-    coord_z.innerHTML = telemetry.z.toFixed(3) + " M";
+      if (telemetry.connected) {
+        fcu.innerHTML = "CONNECTED";
+      } else {
+        fcu.innerHTML = "DISCONNECTED";
+      }
+      if (telemetry.armed) {
+        arm.innerHTML = "ARMED";
+      } else {
+        arm.innerHTML = "DISARMED";
+      }
+      battery.innerHTML =
+        ((telemetry.cell_voltage / telemetry.voltage) * 100).toFixed(0) + "%";
+      coord_x.innerHTML = telemetry.x.toFixed(3) + " M";
+      coord_y.innerHTML = telemetry.y.toFixed(3) + " M";
+      coord_z.innerHTML = telemetry.z.toFixed(3) + " M";
 
-    velocity = Math.sqrt(Math.pow(telemetry.vx, 2) + Math.pow(telemetry.vy, 2));
-    vel.innerHTML = velocity.toFixed(1);
-    let degree = Math.floor((velocity / 10) * 180);
-    needle.style.transform = "rotate(" + degree + "deg)";
-  }
-);
+      velocity = Math.sqrt(
+        Math.pow(telemetry.vx, 2) + Math.pow(telemetry.vy, 2)
+      );
+      vel.innerHTML = velocity.toFixed(1);
+      let degree = Math.floor((velocity / 10) * 180);
+      needle.style.transform = "rotate(" + degree + "deg)";
+    }
+  );
+}, 1000);
