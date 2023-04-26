@@ -204,7 +204,7 @@ let createJoystick = function () {
   });
 
   joystickR.on("move", function (event, nipple) {
-    max_linear = 0.5; // m/s
+    max_linear = 1.0; // m/s
     max_distance = 40.0; // pixels;
     linear_speed_x =
       (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
@@ -360,7 +360,7 @@ window.setInterval(function () {
         Math.pow(telemetry.vx, 2) + Math.pow(telemetry.vy, 2)
       );
       vel.innerHTML = velocity.toFixed(1);
-      let degree = Math.floor((velocity / 10) * 180);
+      let degree = Math.floor((velocity / 2) * 180);
       needle.style.transform = "rotate(" + degree + "deg)";
     }
   );
