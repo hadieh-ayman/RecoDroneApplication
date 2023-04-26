@@ -41,6 +41,7 @@ ros.on("close", function () {
 window.setInterval(function () {
   if (ros.isConnected) {
     // console.log(ros.isConnected);
+    telemetry_service()
   } else {
     // console.log(ros.isConnected);
     popup.classList.add('active')
@@ -339,5 +340,3 @@ let telemetry_service = getTelemetry.callService(
     needle.style.transform = "rotate(" + degree + "deg)";
   }
 );
-
-window.setInterval(telemetry_service, 1000);
