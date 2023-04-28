@@ -2,12 +2,16 @@
 
 let popup = document.querySelector(".popup");
 let close_popup = document.querySelector(".alert-close");
+let alert_item = document.querySelector(".alert-item");
 let popup_circle = document.querySelector(".alert-circle");
 let popup_text = document.querySelector(".alert-text");
+let goal_form = document.querySelector(".goal-form");
+let goal_btn = document.querySelector(".goal-btn");
 
 close_popup.addEventListener("click", function () {
   console.log("close popup");
   popup.classList.remove("active");
+  goal_form.classList.add("hide");
 });
 
 // ################### Connecting to ROS ###################
@@ -43,10 +47,47 @@ window.setInterval(function () {
     // console.log(ros.isConnected);
   } else {
     // console.log(ros.isConnected);
-    popup.classList.add("active");
+    // popup.classList.add("active");
+    // alert_item.classList.remove("hide")
     ros.connect(rosbridge_url);
   }
 }, 1000);
+
+// ################### Publish Goal topic ###################
+
+goal_btn.addEventListener("click", function () {
+  alert_item.classList.add("hide");
+  goal_form.classList.remove("hide");
+  popup.classList.add("active");
+});
+
+publish_goal = new ROSLIB.Topic({
+  ros: ros,
+  name: "move_base_simple/goal",
+  messageType: "geometry_msgs/PoseStamped",
+});
+
+function postGoal(form) {
+  let x = form.x.value;
+  let y = form.y.value;
+  console.log(x + ", " + y);
+  let pose = new ROSLIB.Message({
+    header: {
+      frame_id: "map",
+    },
+    pose: {
+      position: {
+        x: x,
+        y: y,
+        z: 0.0,
+      },
+      orientation: {
+        w: 1.0,
+      },
+    },
+  });
+  publish_goal.publish(pose)
+}
 
 // ################### Define image topics ###################
 
@@ -292,11 +333,11 @@ let start_timer = function () {
   function pad(val) {
     return val > 9 ? val : "0" + val;
   }
-    counting = setInterval(function () {
-      document.getElementById("seconds").innerHTML = pad(++sec % 60);
-      document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
-      document.getElementById("hours").innerHTML = pad(parseInt(sec / 360, 10));
-    }, 1000);
+  counting = setInterval(function () {
+    document.getElementById("seconds").innerHTML = pad(++sec % 60);
+    document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+    document.getElementById("hours").innerHTML = pad(parseInt(sec / 360, 10));
+  }, 1000);
 };
 
 let end_timer = function () {
@@ -304,7 +345,7 @@ let end_timer = function () {
   document.getElementById("minutes").innerHTML = `00`;
   document.getElementById("hours").innerHTML = `00`;
   sec = 0;
-  clearInterval(counting)
+  clearInterval(counting);
 };
 
 // ################### Call telemetry service ###################
@@ -360,7 +401,7 @@ window.setInterval(function () {
         Math.pow(telemetry.vx, 2) + Math.pow(telemetry.vy, 2)
       );
       vel.innerHTML = velocity.toFixed(1);
-      let degree = Math.floor((velocity / 2) * 180);
+      let degree = Math.floor((velocity / 1.5) * 180);
       needle.style.transform = "rotate(" + degree + "deg)";
     }
   );

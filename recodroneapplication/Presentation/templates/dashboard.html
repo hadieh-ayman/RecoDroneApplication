@@ -50,15 +50,23 @@
               <div class="alert-circle"></div>
               <p class="alert-text">ROS is not connected.</p>
             </div>
+            <form action="" class="goal-form hide" onsubmit="postGoal()">
+              <div class="goal-inputs">
+                <input type="number" name="x" class="goal-coord" placeholder="x">
+                <input type="number" name="y" class="goal-coord" placeholder="y">
+              </div>
+              <button type="button" onClick="postGoal(this.form)" class="submit-goal">SUBMIT</button>
+            </form>
           </div>
           <div class="viewer-container">
+            <button class="goal-btn">Nav Goal</button>
             <div class="rviz-view">
               <img
                 id="rviz-screen"
                 src="static/img/stream-placeholder.png"
                 alt=""
-              />
-            </div>
+                />
+              </div>
             <div class="dropdown-menu">
               <select class="menu-select">
                 <option value="camera">camera</option>
