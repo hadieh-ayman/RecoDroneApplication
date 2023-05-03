@@ -68,9 +68,9 @@ let actionClient = new ROSLIB.ActionClient({
 });
 
 let move_baseListener = new ROSLIB.Topic({
-  ros : ros,
-  name : '/move_base/result',
-  messageType : 'move_base_msgs/MoveBaseActionResult'
+  ros: ros,
+  name: "/move_base/result",
+  messageType: "move_base_msgs/MoveBaseActionResult",
 });
 
 let goal = undefined;
@@ -90,30 +90,42 @@ function postGoal(form) {
   });
 
   goal = new ROSLIB.Goal({
-    actionClient : actionClient,
-    goalMessage : {
-      target_pose : {
-        header : {
-          frame_id : '/map'
+    actionClient: actionClient,
+    goalMessage: {
+      target_pose: {
+        header: {
+          frame_id: "/map",
         },
-        pose : pose
-      }
-    }
+        pose: pose,
+      },
+    },
   });
+  goal_start();
   goal.send();
+
+  goal.on("feedback", function (feedback) {
+    console.log("Feedback: " + feedback.sequence);
+  });
+  
+  goal.on("result", function (result) {
+    console.log("Final Result: " + result.sequence);
+  });
 }
 
 function cancelGoal() {
   goal.cancel();
 }
 
-move_baseListener.subscribe(function(actionResult) {
-  console.log('Received message on ' + move_baseListener.name + 'status: ' + actionResult.status.status);
-  alert("in callback of /move_base/result");
-  // actionResult.status.status == 2 (goal cancelled)
-  // actionResult.status.status == 3 (goal reached)
-//    move_baseListener.unsubscribe();
-});
+function goal_start(){
+  move_baseListener.subscribe(function (actionResult) {
+    console.log("Received message on " + move_baseListener.name + "status: " + actionResult.status.status);
+    alert("in callback of /move_base/result");
+    // actionResult.status.status == 2 (goal cancelled)
+    // actionResult.status.status == 3 (goal reached)
+    // move_baseListener.unsubscribe();
+  });
+}
+
 
 // ################### Define image topics ###################
 
