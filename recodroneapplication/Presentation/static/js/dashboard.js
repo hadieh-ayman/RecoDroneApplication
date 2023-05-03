@@ -73,7 +73,7 @@ let move_baseListener = new ROSLIB.Topic({
   messageType : 'move_base_msgs/MoveBaseActionResult'
 });
 
-let goal = new ROSLIB.Goal(null)
+let goal = undefined;
 
 function postGoal(form) {
   let x = form.x.value;
