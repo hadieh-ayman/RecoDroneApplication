@@ -61,12 +61,6 @@ goal_btn.addEventListener("click", function () {
   popup.classList.add("active");
 });
 
-// publish_goal = new ROSLIB.Topic({
-//   ros: ros,
-//   name: "move_base_simple/goal",
-//   messageType: "geometry_msgs/PoseStamped",
-// });
-
 let actionClient = new ROSLIB.ActionClient({
   ros: ros,
   serverName: "/move_base",
@@ -78,6 +72,8 @@ let move_baseListener = new ROSLIB.Topic({
   name : '/move_base/result',
   messageType : 'move_base_msgs/MoveBaseActionResult'
 });
+
+let goal = new ROSLIB.Goal(null)
 
 function postGoal(form) {
   let x = form.x.value;
@@ -93,7 +89,7 @@ function postGoal(form) {
     orientation: orientation,
   });
 
-  let goal = new ROSLIB.Goal({
+  goal = new ROSLIB.Goal({
     actionClient : actionClient,
     goalMessage : {
       target_pose : {
@@ -104,10 +100,6 @@ function postGoal(form) {
       }
     }
   });
-  sendGoal()
-}
-
-function sendGoal() {
   goal.send();
 }
 
@@ -407,12 +399,9 @@ window.setInterval(function () {
   getTelemetry.callService(
     new ROSLIB.ServiceRequest({ frame_id: "map" }),
     function (result) {
-      if (result.success) {
-        console.log("telemetry received");
-      }
       // Service respond callback
       let telemetry_json = JSON.stringify(result);
-      console.log("Telemetry: " + telemetry_json);
+      // console.log("Telemetry: " + telemetry_json);
       telemetry = JSON.parse(telemetry_json);
 
       if (telemetry.connected) {
