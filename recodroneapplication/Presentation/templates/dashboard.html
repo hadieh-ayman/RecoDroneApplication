@@ -51,15 +51,20 @@
               <p class="alert-text">ROS is not connected.</p>
             </div>
             <form action="" class="goal-form hide" onsubmit="postGoal()">
+              <h3 class="goal-popup-text">Send a goal target for the drone to explore</h3>
               <div class="goal-inputs">
                 <input type="number" name="x" class="goal-coord" placeholder="x">
                 <input type="number" name="y" class="goal-coord" placeholder="y">
               </div>
-              <button type="button" onClick="postGoal(this.form)" class="submit-goal">SUBMIT</button>
+              <div class="goal-btns">
+                <button type="button" onClick="postGoal(this.form)" class="submit-goal">submit goal</button>
+                <button type="button" onClick="cancelGoal()" class="cancel-goal">cancel goal</button>
+              </div>
             </form>
           </div>
           <div class="viewer-container">
             <button class="goal-btn">Nav Goal</button>
+            <button class="selfcheck-btn">Self Check</button>
             <div class="rviz-view">
               <img
                 id="rviz-screen"

@@ -61,33 +61,67 @@ goal_btn.addEventListener("click", function () {
   popup.classList.add("active");
 });
 
-publish_goal = new ROSLIB.Topic({
+// publish_goal = new ROSLIB.Topic({
+//   ros: ros,
+//   name: "move_base_simple/goal",
+//   messageType: "geometry_msgs/PoseStamped",
+// });
+
+let actionClient = new ROSLIB.ActionClient({
   ros: ros,
-  name: "move_base_simple/goal",
-  messageType: "geometry_msgs/PoseStamped",
+  serverName: "/move_base",
+  actionName: "move_base_msgs/MoveBaseAction",
+});
+
+let move_baseListener = new ROSLIB.Topic({
+  ros : ros,
+  name : '/move_base/result',
+  messageType : 'move_base_msgs/MoveBaseActionResult'
 });
 
 function postGoal(form) {
   let x = form.x.value;
   let y = form.y.value;
   console.log(x + ", " + y);
-  let pose = new ROSLIB.Message({
-    header: {
-      frame_id: "map",
-    },
-    pose: {
-      position: {
-        x: x,
-        y: y,
-        z: 0.0,
-      },
-      orientation: {
-        w: 1.0,
-      },
-    },
+  let positionVec3 = new ROSLIB.Vector3(null);
+  let orientation = new ROSLIB.Quaternion({ x: 0, y: 0, z: 0, w: 1.0 });
+  positionVec3.x = x;
+  positionVec3.y = y;
+
+  let pose = new ROSLIB.Pose({
+    position: positionVec3,
+    orientation: orientation,
   });
-  publish_goal.publish(pose)
+
+  let goal = new ROSLIB.Goal({
+    actionClient : actionClient,
+    goalMessage : {
+      target_pose : {
+        header : {
+          frame_id : '/map'
+        },
+        pose : pose
+      }
+    }
+  });
+  sendGoal()
 }
+
+function sendGoal() {
+  goal.send();
+}
+
+function cancelGoal() {
+  goal.cancel();
+}
+
+move_baseListener.subscribe(function(actionResult) {
+  console.log('Received message on ' + move_baseListener.name + 'status: ' + actionResult.status.status);
+  alert("in callback of /move_base/result");
+  // actionResult.status.status == 2 (goal cancelled)
+  // actionResult.status.status == 3 (goal reached)
+//    move_baseListener.unsubscribe();
+});
 
 // ################### Define image topics ###################
 
