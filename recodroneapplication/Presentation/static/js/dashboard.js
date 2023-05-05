@@ -44,7 +44,7 @@ ros.on("close", function () {
 //Handle ROS connection
 window.setInterval(function () {
   if (ros.isConnected) {
-    console.log(ros.isConnected);
+    // console.log(ros.isConnected);
   } else {
     // console.log(ros.isConnected);
     // popup.classList.add("active");
@@ -61,19 +61,11 @@ goal_btn.addEventListener("click", function () {
   popup.classList.add("active");
 });
 
-let actionClient = new ROSLIB.ActionClient({
+let target_goal = new ROSLIB.Topic({
   ros: ros,
-  serverName: "/move_base",
-  actionName: "move_base_msgs/MoveBaseAction",
+  name: "recodrone_goal",
+  messageType: "geometry_msgs/PoseStamped",
 });
-
-let move_baseListener = new ROSLIB.Topic({
-  ros: ros,
-  name: "/move_base/result",
-  messageType: "move_base_msgs/MoveBaseActionResult",
-});
-
-let goal = undefined;
 
 function postGoal(form) {
   let x = form.x.value;
@@ -89,30 +81,15 @@ function postGoal(form) {
     orientation: orientation,
   });
 
-  goal = new ROSLIB.Goal({
-    actionClient: actionClient,
-    goalMessage: {
-      target_pose: {
-        header: {
-          frame_id: "/map",
-        },
-        pose: pose,
-      },
+  let goal = new ROSLIB.Message({
+    header: {
+      frame_id: "/map",
     },
+    pose: pose,
   });
   console.log("sending goal");
-  goal.send();
+  target_goal.publish(goal);
 }
-
-move_baseListener.subscribe(function (actionResult) {
-  console.log(
-    "Received message on " +
-      move_baseListener.name +
-      "status: " +
-      actionResult.status.status
-  );
-  move_baseListener.unsubscribe();
-});
 
 // ################### Define image topics ###################
 
