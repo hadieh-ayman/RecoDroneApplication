@@ -100,38 +100,19 @@ function postGoal(form) {
       },
     },
   });
-  goal_start();
-  console.log("sending goal")
+  console.log("sending goal");
   goal.send();
-
-  goal.on("feedback", function (feedback) {
-    console.log("Feedback: " + feedback.sequence);
-  });
-
-  goal.on("result", function (result) {
-    console.log("Final Result: " + result.sequence);
-  });
 }
 
-function cancelGoal() {
-  goal.cancel();
-}
-
-function goal_start() {
-  console.log("Starting goal");
-  move_baseListener.subscribe(function (actionResult) {
-    console.log(
-      "Received message on " +
-        move_baseListener.name +
-        "status: " +
-        actionResult.status.status
-    );
-    alert("in callback of /move_base/result");
-    // actionResult.status.status == 2 (goal cancelled)
-    move_baseListener.unsubscribe();
-  });
-}
-
+move_baseListener.subscribe(function (actionResult) {
+  console.log(
+    "Received message on " +
+      move_baseListener.name +
+      "status: " +
+      actionResult.status.status
+  );
+  move_baseListener.unsubscribe();
+});
 
 // ################### Define image topics ###################
 
