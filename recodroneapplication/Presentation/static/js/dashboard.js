@@ -63,7 +63,7 @@ goal_btn.addEventListener("click", function () {
 
 let target_goal = new ROSLIB.Topic({
   ros: ros,
-  name: "recodrone_goal",
+  name: "goal",
   messageType: "geometry_msgs/PoseStamped",
 });
 
