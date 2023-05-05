@@ -44,7 +44,7 @@ ros.on("close", function () {
 //Handle ROS connection
 window.setInterval(function () {
   if (ros.isConnected) {
-    // console.log(ros.isConnected);
+    console.log(ros.isConnected);
   } else {
     // console.log(ros.isConnected);
     // popup.classList.add("active");
@@ -101,12 +101,13 @@ function postGoal(form) {
     },
   });
   goal_start();
+  console.log("sending goal")
   goal.send();
 
   goal.on("feedback", function (feedback) {
     console.log("Feedback: " + feedback.sequence);
   });
-  
+
   goal.on("result", function (result) {
     console.log("Final Result: " + result.sequence);
   });
@@ -116,13 +117,18 @@ function cancelGoal() {
   goal.cancel();
 }
 
-function goal_start(){
+function goal_start() {
+  console.log("Starting goal");
   move_baseListener.subscribe(function (actionResult) {
-    console.log("Received message on " + move_baseListener.name + "status: " + actionResult.status.status);
+    console.log(
+      "Received message on " +
+        move_baseListener.name +
+        "status: " +
+        actionResult.status.status
+    );
     alert("in callback of /move_base/result");
     // actionResult.status.status == 2 (goal cancelled)
-    // actionResult.status.status == 3 (goal reached)
-    // move_baseListener.unsubscribe();
+    move_baseListener.unsubscribe();
   });
 }
 
@@ -260,7 +266,7 @@ let createJoystick = function () {
   let linear_speed_x = 0;
   let linear_speed_y = 0;
   let angular_speed = 0;
-  var timer;
+  let timer;
 
   joystickL.on("start", function (event, nipple) {
     timer = setInterval(function () {
@@ -275,16 +281,16 @@ let createJoystick = function () {
   });
 
   joystickL.on("move", function (event, nipple) {
-    max_angular = 1.0; // rad/s
-    max_distance = 40.0; // pixels;
+    let max_angular = 1.0; // rad/s
+    let max_distance = 40.0; // pixels;
     angular_speed =
       (-Math.cos(nipple.angle.radian) * max_angular * nipple.distance) /
       max_distance;
   });
 
   joystickR.on("move", function (event, nipple) {
-    max_linear = 1.0; // m/s
-    max_distance = 40.0; // pixels;
+    let max_linear = 1.0; // m/s
+    let max_distance = 40.0; // pixels;
     linear_speed_x =
       (Math.sin(nipple.angle.radian) * max_linear * nipple.distance) /
       max_distance;
@@ -413,7 +419,6 @@ window.setInterval(function () {
     function (result) {
       // Service respond callback
       let telemetry_json = JSON.stringify(result);
-      // console.log("Telemetry: " + telemetry_json);
       telemetry = JSON.parse(telemetry_json);
 
       if (telemetry.connected) {
