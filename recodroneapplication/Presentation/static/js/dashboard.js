@@ -72,9 +72,9 @@ function postGoal(form) {
   let y = form.y.value;
   console.log(x + ", " + y);
   let positionVec3 = new ROSLIB.Vector3(null);
-  let orientation = new ROSLIB.Quaternion({ x: 0, y: 0, z: 0, w: 1.0 });
-  positionVec3.x = x;
-  positionVec3.y = y;
+  let orientation = new ROSLIB.Quaternion({ x: 0.0, y: 0.0, z: 0.0, w: 1.0 });
+  positionVec3.x = float(x);
+  positionVec3.y = float(y);
 
   let pose = new ROSLIB.Pose({
     position: positionVec3,
@@ -87,7 +87,7 @@ function postGoal(form) {
     },
     pose: pose,
   });
-  console.log("sending goal");
+  console.log("publishing goal");
   target_goal.publish(goal);
 }
 
