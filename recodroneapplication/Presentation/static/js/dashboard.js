@@ -61,10 +61,16 @@ goal_btn.addEventListener("click", function () {
   popup.classList.add("active");
 });
 
-let target_goal = new ROSLIB.Topic({
+let actionClient = new ROSLIB.ActionClient({
   ros: ros,
-  name: "goal",
-  messageType: "geometry_msgs/PoseStamped",
+  serverName: "/move_base",
+  actionName: "move_base_msgs/MoveBaseAction",
+});
+
+let move_baseListener = new ROSLIB.Topic({
+  ros: ros,
+  name: "/move_base/result",
+  messageType: "move_base_msgs/MoveBaseActionResult",
 });
 
 function postGoal(form) {
@@ -73,23 +79,38 @@ function postGoal(form) {
   console.log(x + ", " + y);
   let positionVec3 = new ROSLIB.Vector3(null);
   let orientation = new ROSLIB.Quaternion({ x: 0.0, y: 0.0, z: 0.0, w: 1.0 });
-  positionVec3.x = float(x);
-  positionVec3.y = float(y);
+  positionVec3.x = parseFloat(x);
+  positionVec3.y = parseFloat(y);
 
   let pose = new ROSLIB.Pose({
     position: positionVec3,
     orientation: orientation,
   });
 
-  let goal = new ROSLIB.Message({
-    header: {
-      frame_id: "/map",
+  let goal = new ROSLIB.Goal({
+    actionClient: actionClient,
+    goalMessage: {
+      target_pose: {
+        header: {
+          frame_id: "/map",
+        },
+        pose: pose,
+      },
     },
-    pose: pose,
   });
-  console.log("publishing goal");
-  target_goal.publish(goal);
+  console.log("sending goal");
+  goal.send();
 }
+
+move_baseListener.subscribe(function (actionResult) {
+  console.log(
+    "Received message on " +
+      move_baseListener.name +
+      "status: " +
+      actionResult.status.status
+  );
+  move_baseListener.unsubscribe();
+});
 
 // ################### Define image topics ###################
 
