@@ -92,7 +92,7 @@ function postGoal(form) {
     goalMessage: {
       target_pose: {
         header: {
-          frame_id: "/map",
+          frame_id: "map",
         },
         pose: pose,
       },
@@ -138,7 +138,7 @@ view_menu.addEventListener("click", function () {
       });
       stream_start();
       break;
-    case "3D":
+    case "2D-2":
       console.log("3D map is broadcasting");
       rviz_stream = new ROSLIB.Topic({
         ros: ros,
