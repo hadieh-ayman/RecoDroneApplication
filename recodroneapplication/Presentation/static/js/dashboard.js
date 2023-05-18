@@ -141,6 +141,7 @@ view_menu.addEventListener("click", function () {
       });
       stream_start();
       break;
+
     case "2D":
       console.log("2D map is broadcasting");
       rviz_stream = new ROSLIB.Topic({
@@ -150,11 +151,32 @@ view_menu.addEventListener("click", function () {
       });
       stream_start();
       break;
+
     case "2D-2":
-      console.log("3D map is broadcasting");
+      console.log("Zoomed 2D map is broadcasting");
       rviz_stream = new ROSLIB.Topic({
         ros: ros,
         name: "/camera2/image_compressed/compressed",
+        messageType: "sensor_msgs/CompressedImage",
+      });
+      stream_start();
+      break;
+
+      case "pc":
+      console.log("3D map is broadcasting");
+      rviz_stream = new ROSLIB.Topic({
+        ros: ros,
+        name: "/camera3/image_compressed/compressed",
+        messageType: "sensor_msgs/CompressedImage",
+      });
+      stream_start();
+      break;
+
+      case "3D":
+      console.log("2D image is broadcasting");
+      rviz_stream = new ROSLIB.Topic({
+        ros: ros,
+        name: "/scan_image/image_compressed/compressed",
         messageType: "sensor_msgs/CompressedImage",
       });
       stream_start();
