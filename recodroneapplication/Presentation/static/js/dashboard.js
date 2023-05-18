@@ -44,11 +44,11 @@ ros.on("close", function () {
 //Handle ROS connection
 window.setInterval(function () {
   if (ros.isConnected) {
-    // console.log(ros.isConnected);
+    console.log(ros.isConnected);
   } else {
-    // console.log(ros.isConnected);
-    // popup.classList.add("active");
-    // alert_item.classList.remove("hide")
+    console.log(ros.isConnected);
+    popup.classList.add("active");
+    alert_item.classList.remove("hide")
     ros.connect(rosbridge_url);
   }
 }, 1000);
@@ -73,6 +73,8 @@ let move_baseListener = new ROSLIB.Topic({
   messageType: "move_base_msgs/MoveBaseActionResult",
 });
 
+let goal = undefined;
+
 function postGoal(form) {
   let x = form.x.value;
   let y = form.y.value;
@@ -87,7 +89,7 @@ function postGoal(form) {
     orientation: orientation,
   });
 
-  let goal = new ROSLIB.Goal({
+  goal = new ROSLIB.Goal({
     actionClient: actionClient,
     goalMessage: {
       target_pose: {
@@ -100,6 +102,16 @@ function postGoal(form) {
   });
   console.log("sending goal");
   goal.send();
+  popup.classList.remove("active");
+  goal_form.classList.add("hide");
+  alert_item.classList.remove("hide");
+}
+
+function cancelGoal() {
+  goal.cancel();
+  popup.classList.remove("active");
+  goal_form.classList.add("hide");
+  alert_item.classList.remove("hide");
 }
 
 move_baseListener.subscribe(function (actionResult) {
@@ -177,18 +189,20 @@ function leftClick() {
   switchbox.style.left = "0.2rem";
   switchbox.style.width = "5rem";
   drone_state = "manual";
+  popup_text.innerHTML = `Switching drone state to Manual.`;
+  alert_item.classList.remove('hide')
   popup.classList.add("active");
   popup.classList.add("loading");
-  popup_text.innerHTML = `Switching drone state to Manual.`;
 }
 
 function rightClick() {
   switchbox.style.left = "5.6rem";
   switchbox.style.width = "5.4rem";
   drone_state = "offboard";
+  popup_text.innerHTML = `Switching drone state to Offboard.`;
+  alert_item.classList.remove('hide')
   popup.classList.add("active");
   popup.classList.add("loading");
-  popup_text.innerHTML = `Switching drone state to Offboard.`;
 }
 
 // ################### Navigation Commands ###################
@@ -330,6 +344,7 @@ takeoff.addEventListener("click", function () {
     }),
     function (result) {
       if (result.success) {
+        alert_item.classList.remove('hide')
         popup.classList.add("active");
         popup.classList.add("loading");
         popup_text.innerHTML = `Drone is taking off one meter above ground.`;
@@ -343,6 +358,7 @@ takeoff.addEventListener("click", function () {
 land.addEventListener("click", function () {
   land_service.callService(new ROSLIB.ServiceRequest({}), function (result) {
     if (result.success) {
+      alert_item.classList.remove('hide')
       popup.classList.add("active");
       popup.classList.add("loading");
       popup_text.innerHTML = `Drone is landing.`;
@@ -402,13 +418,17 @@ window.setInterval(function () {
 
       if (telemetry.connected) {
         fcu.innerHTML = "CONNECTED";
+        fcu.classList.add("success");
       } else {
         fcu.innerHTML = "DISCONNECTED";
+        fcu.classList.remove("success");
       }
       if (telemetry.armed) {
         arm.innerHTML = "ARMED";
+        arm.classList.add("success");
       } else {
         arm.innerHTML = "DISARMED";
+        arm.classList.remove("success");
       }
       battery.innerHTML =
         ((telemetry.cell_voltage / telemetry.voltage) * 100).toFixed(0) + "%";
